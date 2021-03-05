@@ -2,9 +2,7 @@ package blog.controller;
 
 import blog.pojo.po.Diary;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.diary.DiaryQueryVO;
 import blog.service.DiaryService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -43,18 +41,7 @@ public class DiaryController {
     @GetMapping("/query")
     public ResponseVO<?> selectDiary(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        Page<Object> page = PageHelper.startPage(pageNum, pageSize);
-        ResponseVO<DiaryQueryVO> responseVO = diaryService.selectDiary();
-        Long pageTotal = page.getTotal();
-        Integer pages = page.getPages();
-        DiaryQueryVO diaryQueryVO = responseVO.getData();
-        diaryQueryVO.setTotal(pageTotal);
-        diaryQueryVO.setMaxPage(pages);
-        diaryQueryVO.setLastPage(pageNum>1?pageNum-1:null);
-        diaryQueryVO.setNextPage(pageNum>=pages?null:pageNum+1);
-        diaryQueryVO.setPageNum(pageNum);
-        diaryQueryVO.setPageSize(pageSize);
-        responseVO.setData(diaryQueryVO);
-        return responseVO;
+        PageHelper.startPage(pageNum, pageSize);
+        return diaryService.selectDiary();
     }
 }

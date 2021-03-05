@@ -5,13 +5,14 @@ import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.mapper.ArticleCategoryMapper;
 import blog.pojo.po.ArticleCategory;
 import blog.pojo.po.Example.ArticleCategoryExample;
-import blog.pojo.vo.article.ArticleCategoryQueryVO;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleCategoryService;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,11 +63,10 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     }
 
     @Override
-    public ResponseVO<ArticleCategoryQueryVO> selectArticleCategory() {
+    public ResponseVO<PageInfo<ArticleCategory>> selectArticleCategory() {
         List<ArticleCategory> list = articleCategoryMapper.selectByExample(new ArticleCategoryExample());
-        // 自定义返回类赋值
-        ArticleCategoryQueryVO articleCategoryQueryVO = new ArticleCategoryQueryVO();
-        articleCategoryQueryVO.setArticleCategoryList(list);
-        return ParameterWrapperUtils.successAndRenderData(articleCategoryQueryVO);
+        PageInfo<ArticleCategory> pageInfo = new PageInfo<>();
+        pageInfo.setList(list);
+        return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

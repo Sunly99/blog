@@ -1,16 +1,12 @@
 package blog.controller;
 
 import blog.pojo.po.Setting;
-import blog.pojo.po.User;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.user.UserQueryVO;
 import blog.service.SettingService;
-import blog.service.UserService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 
@@ -27,11 +23,13 @@ public class SettingController {
     @Resource
     private SettingService settingService;
 
+    @ApiIgnore
     @PostMapping("/add")
     public ResponseVO<?> insertSetting(@RequestBody Setting setting){
         return settingService.insertSetting(setting);
     }
 
+    @ApiIgnore
     @PostMapping("/del")
     public ResponseVO<?> deleteSetting(@RequestParam("id") Integer id){
         return settingService.deleteSetting(id);

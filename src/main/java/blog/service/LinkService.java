@@ -2,7 +2,7 @@ package blog.service;
 
 import blog.pojo.po.Link;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.link.LinkQueryVO;
+import com.github.pagehelper.PageInfo;
 
 
 /**
@@ -39,7 +39,7 @@ public interface LinkService {
     /**
      * 查询友链
      *
-     * @return ResponseVO<LinkQueryVO> 自定义友链查询返回类
+     * @return ResponseVO<PageInfo<Link>> 自定义标准返回类
      */
-    ResponseVO<LinkQueryVO> selectLink();
+    ResponseVO<PageInfo<Link>> selectLink();
 }

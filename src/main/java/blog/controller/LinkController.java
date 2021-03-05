@@ -2,9 +2,7 @@ package blog.controller;
 
 import blog.pojo.po.Link;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.link.LinkQueryVO;
 import blog.service.LinkService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -43,18 +41,7 @@ public class LinkController {
     @GetMapping("/query")
     public ResponseVO<?> selectLink(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        Page<Object> page = PageHelper.startPage(pageNum, pageSize);
-        ResponseVO<LinkQueryVO> responseVO = linkService.selectLink();
-        Long pageTotal = page.getTotal();
-        Integer pages = page.getPages();
-        LinkQueryVO linkQueryVO = responseVO.getData();
-        linkQueryVO.setTotal(pageTotal);
-        linkQueryVO.setMaxPage(pages);
-        linkQueryVO.setLastPage(pageNum>1?pageNum-1:null);
-        linkQueryVO.setNextPage(pageNum>=pages?null:pageNum+1);
-        linkQueryVO.setPageNum(pageNum);
-        linkQueryVO.setPageSize(pageSize);
-        responseVO.setData(linkQueryVO);
-        return responseVO;
+        PageHelper.startPage(pageNum, pageSize);
+        return linkService.selectLink();
     }
 }

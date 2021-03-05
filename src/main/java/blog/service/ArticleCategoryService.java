@@ -1,8 +1,8 @@
 package blog.service;
 
 import blog.pojo.po.ArticleCategory;
-import blog.pojo.vo.article.ArticleCategoryQueryVO;
 import blog.pojo.vo.common.ResponseVO;
+import com.github.pagehelper.PageInfo;
 
 /**
  * ArticleCategoryService
@@ -38,7 +38,7 @@ public interface ArticleCategoryService {
     /**
      * 查询文章类型
      *
-     * @return ResponseVO<ArticleCategoryQueryVO> 自定义分类查询返回类
+     * @return ResponseVO<PageInfo<ArticleCategory>> 自定义分类查询返回类
      */
-    ResponseVO<ArticleCategoryQueryVO> selectArticleCategory();
+    ResponseVO<PageInfo<ArticleCategory>> selectArticleCategory();
 }

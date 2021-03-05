@@ -6,8 +6,8 @@ import blog.pojo.mapper.UserMapper;
 import blog.pojo.po.Example.UserExample;
 import blog.pojo.po.User;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.user.UserQueryVO;
 import blog.service.UserService;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -66,11 +66,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseVO<UserQueryVO> selectUser() {
+    public ResponseVO<PageInfo<User>> selectUser() {
         List<User> list = userMapper.selectByExample(new UserExample());
-        // 自定义返回类赋值
-        UserQueryVO userQueryVO = new UserQueryVO();
-        userQueryVO.setUserList(list);
-        return ParameterWrapperUtils.successAndRenderData(userQueryVO);
+        PageInfo<User> pageInfo = new PageInfo<>();
+        pageInfo.setList(list);
+        return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

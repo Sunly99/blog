@@ -8,8 +8,8 @@ import blog.pojo.po.Example.MessageViewExample;
 import blog.pojo.po.Message;
 import blog.pojo.po.MessageView;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.message.MessageQueryVO;
 import blog.service.MessageService;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -70,11 +70,10 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public ResponseVO<MessageQueryVO> selectMessage() {
+    public ResponseVO<PageInfo<MessageView>> selectMessage() {
         List<MessageView> list = messageViewMapper.selectByExample(new MessageViewExample());
-        // 自定义返回类赋值
-        MessageQueryVO messageQueryVO = new MessageQueryVO();
-        messageQueryVO.setMessageList(list);
-        return ParameterWrapperUtils.successAndRenderData(messageQueryVO);
+        PageInfo<MessageView> pageInfo = new PageInfo<>();
+        pageInfo.setList(list);
+        return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

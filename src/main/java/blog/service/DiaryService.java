@@ -2,7 +2,7 @@ package blog.service;
 
 import blog.pojo.po.Diary;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.diary.DiaryQueryVO;
+import com.github.pagehelper.PageInfo;
 
 /**
  * DiaryService
@@ -38,7 +38,7 @@ public interface DiaryService {
     /**
      * 查询日记
      *
-     * @return ResponseVO<DiaryQueryVO> 自定义日记查询返回类
+     * @return ResponseVO<PageInfo<Diary>> 自定义标准返回类
      */
-    ResponseVO<DiaryQueryVO> selectDiary();
+    ResponseVO<PageInfo<Diary>> selectDiary();
 }

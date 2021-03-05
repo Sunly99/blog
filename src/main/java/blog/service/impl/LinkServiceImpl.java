@@ -6,8 +6,8 @@ import blog.pojo.mapper.LinkMapper;
 import blog.pojo.po.Example.LinkExample;
 import blog.pojo.po.Link;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.link.LinkQueryVO;
 import blog.service.LinkService;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -66,11 +66,10 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public ResponseVO<LinkQueryVO> selectLink() {
+    public ResponseVO<PageInfo<Link>> selectLink() {
         List<Link> list = linkMapper.selectByExample(new LinkExample());
-        // 自定义返回类赋值
-        LinkQueryVO linkQueryVO = new LinkQueryVO();
-        linkQueryVO.setLinkList(list);
-        return ParameterWrapperUtils.successAndRenderData(linkQueryVO);
+        PageInfo<Link> pageInfo = new PageInfo<>();
+        pageInfo.setList(list);
+        return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

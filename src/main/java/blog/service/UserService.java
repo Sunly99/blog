@@ -1,10 +1,8 @@
 package blog.service;
 
-import blog.pojo.po.Link;
 import blog.pojo.po.User;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.link.LinkQueryVO;
-import blog.pojo.vo.user.UserQueryVO;
+import com.github.pagehelper.PageInfo;
 
 /**
  * UserService
@@ -40,7 +38,7 @@ public interface UserService {
     /**
      * 查询用户
      *
-     * @return ResponseVO<UserQueryVO> 自定义用户查询返回类
+     * @return ResponseVO<PageInfo<User>> 自定义标准返回类
      */
-    ResponseVO<UserQueryVO> selectUser();
+    ResponseVO<PageInfo<User>> selectUser();
 }

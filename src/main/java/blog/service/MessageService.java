@@ -1,8 +1,9 @@
 package blog.service;
 
 import blog.pojo.po.Message;
+import blog.pojo.po.MessageView;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.message.MessageQueryVO;
+import com.github.pagehelper.PageInfo;
 
 /**
  * MessageService
@@ -38,7 +39,7 @@ public interface MessageService {
     /**
      * 查询留言
      *
-     * @return ResponseVO<MessageQueryVO> 自定义留言查询返回类
+     * @return ResponseVO<PageInfo<MessageView>> 自定义标准返回类
      */
-    ResponseVO<MessageQueryVO> selectMessage();
+    ResponseVO<PageInfo<MessageView>> selectMessage();
 }

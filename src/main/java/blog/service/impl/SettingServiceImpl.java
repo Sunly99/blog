@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,8 @@ public class SettingServiceImpl implements SettingService {
     public ResponseVO<?> insertSetting(Setting setting) {
         int count;
         try{
+            Date date = new Date();
+            setting.setUpdateTime(date);
             count = settingMapper.insertSelective(setting);
         }catch (Exception e){
             log.error("SettingServiceImpl:insertSetting \n" + e.getMessage());
@@ -50,20 +53,24 @@ public class SettingServiceImpl implements SettingService {
 
     @Override
     public ResponseVO<?> updateSetting(Setting setting) {
-        int count;
-        try{
-            count = settingMapper.updateByPrimaryKeySelective(setting);
-        }catch (Exception e){
-            log.error("SettingServiceImpl:updateSetting \n" + e.getMessage());
-            return ParameterWrapperUtils.putCode2ResponseVO(StatusCodeEnum.DATABASE_UPDATE_FAIL,e);
+        if (setting.getId()==null){
+            return insertSetting(setting);
+        }else {
+            int count;
+            try{
+                count = settingMapper.updateByPrimaryKeySelective(setting);
+            }catch (Exception e){
+                log.error("SettingServiceImpl:updateSetting \n" + e.getMessage());
+                return ParameterWrapperUtils.putCode2ResponseVO(StatusCodeEnum.DATABASE_UPDATE_FAIL,e);
+            }
+            return ParameterWrapperUtils.successAndRenderData(count);
         }
-        return ParameterWrapperUtils.successAndRenderData(count);
     }
 
     @Override
     public ResponseVO<Setting> selectSetting() {
         Setting setting = new Setting();
         List<Setting> list = settingMapper.selectByExample(new SettingExample());
-        return ParameterWrapperUtils.successAndRenderData(list.size()>0?list.get(0):setting);
+        return ParameterWrapperUtils.successAndRenderData(list.size()>0?list.get(list.size()-1):setting);
     }
 }

@@ -6,8 +6,8 @@ import blog.pojo.mapper.DiaryMapper;
 import blog.pojo.po.Diary;
 import blog.pojo.po.Example.DiaryExample;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.diary.DiaryQueryVO;
 import blog.service.DiaryService;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -66,11 +66,10 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public ResponseVO<DiaryQueryVO> selectDiary() {
+    public ResponseVO<PageInfo<Diary>> selectDiary() {
         List<Diary> list = diaryMapper.selectByExample(new DiaryExample());
-        // 自定义返回类赋值
-        DiaryQueryVO diaryQueryVO = new DiaryQueryVO();
-        diaryQueryVO.setDiaryList(list);
-        return ParameterWrapperUtils.successAndRenderData(diaryQueryVO);
+        PageInfo<Diary> pageInfo = new PageInfo<>();
+        pageInfo.setList(list);
+        return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }
