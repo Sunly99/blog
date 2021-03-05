@@ -3,7 +3,6 @@ package blog.controller;
 import blog.pojo.po.ArticleMessage;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleMessageService;
-import blog.service.ArticleMessageService;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

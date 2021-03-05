@@ -71,7 +71,7 @@ public class ArticleMessageServiceImpl implements ArticleMessageService {
 
     @Override
     public ResponseVO<PageInfo<ArticleMessageView>> selectArticleMessage() {
-        List<ArticleMessageView> list = articleMessageViewMapper.selectByExample(new ArticleMessageViewExample());
+        List<ArticleMessageView> list = articleMessageViewMapper.selectByExampleWithBLOBs(new ArticleMessageViewExample());
         PageInfo<ArticleMessageView> pageInfo = new PageInfo<>();
         pageInfo.setList(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);

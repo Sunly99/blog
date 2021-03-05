@@ -1,8 +1,7 @@
 package blog.service;
 
 import blog.pojo.po.Article;
-import blog.pojo.po.ArticleMainView;
-import blog.pojo.po.ArticleSimpleView;
+import blog.pojo.po.ArticleView;
 import blog.pojo.vo.common.ResponseVO;
 import com.github.pagehelper.PageInfo;
 
@@ -38,16 +37,17 @@ public interface ArticleService {
     ResponseVO<?> updateArticle(Article article);
 
     /**
-     * 查询文章
+     * 查询文章列表
      *
      * @return ResponseVO<PageInfo<Article>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<ArticleMainView>> selectArticle();
+    ResponseVO<PageInfo<ArticleView>> selectArticle();
 
     /**
-     * 查询文章(简略)
+     * 查询文章内容
      *
+     * @param id 文章编号
      * @return ResponseVO<PageInfo<Article>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<ArticleSimpleView>> selectArticleSimple();
+    ResponseVO<ArticleView> selectArticleById(Integer id);
 }

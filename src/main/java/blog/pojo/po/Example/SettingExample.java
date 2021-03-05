@@ -725,73 +725,73 @@ public class SettingExample {
             return (Criteria) this;
         }
 
-        public Criteria andSummaryIsNull() {
-            addCriterion("summary is null");
+        public Criteria andAboutIsNull() {
+            addCriterion("about is null");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryIsNotNull() {
-            addCriterion("summary is not null");
+        public Criteria andAboutIsNotNull() {
+            addCriterion("about is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryEqualTo(String value) {
-            addCriterion("summary =", value, "summary");
+        public Criteria andAboutEqualTo(String value) {
+            addCriterion("about =", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryNotEqualTo(String value) {
-            addCriterion("summary <>", value, "summary");
+        public Criteria andAboutNotEqualTo(String value) {
+            addCriterion("about <>", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryGreaterThan(String value) {
-            addCriterion("summary >", value, "summary");
+        public Criteria andAboutGreaterThan(String value) {
+            addCriterion("about >", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryGreaterThanOrEqualTo(String value) {
-            addCriterion("summary >=", value, "summary");
+        public Criteria andAboutGreaterThanOrEqualTo(String value) {
+            addCriterion("about >=", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryLessThan(String value) {
-            addCriterion("summary <", value, "summary");
+        public Criteria andAboutLessThan(String value) {
+            addCriterion("about <", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryLessThanOrEqualTo(String value) {
-            addCriterion("summary <=", value, "summary");
+        public Criteria andAboutLessThanOrEqualTo(String value) {
+            addCriterion("about <=", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryLike(String value) {
-            addCriterion("summary like", value, "summary");
+        public Criteria andAboutLike(String value) {
+            addCriterion("about like", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryNotLike(String value) {
-            addCriterion("summary not like", value, "summary");
+        public Criteria andAboutNotLike(String value) {
+            addCriterion("about not like", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryIn(List<String> values) {
-            addCriterion("summary in", values, "summary");
+        public Criteria andAboutIn(List<String> values) {
+            addCriterion("about in", values, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryNotIn(List<String> values) {
-            addCriterion("summary not in", values, "summary");
+        public Criteria andAboutNotIn(List<String> values) {
+            addCriterion("about not in", values, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryBetween(String value1, String value2) {
-            addCriterion("summary between", value1, value2, "summary");
+        public Criteria andAboutBetween(String value1, String value2) {
+            addCriterion("about between", value1, value2, "about");
             return (Criteria) this;
         }
 
-        public Criteria andSummaryNotBetween(String value1, String value2) {
-            addCriterion("summary not between", value1, value2, "summary");
+        public Criteria andAboutNotBetween(String value1, String value2) {
+            addCriterion("about not between", value1, value2, "about");
             return (Criteria) this;
         }
     }

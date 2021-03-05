@@ -71,7 +71,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public ResponseVO<PageInfo<MessageView>> selectMessage() {
-        List<MessageView> list = messageViewMapper.selectByExample(new MessageViewExample());
+        List<MessageView> list = messageViewMapper.selectByExampleWithBLOBs(new MessageViewExample());
         PageInfo<MessageView> pageInfo = new PageInfo<>();
         pageInfo.setList(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);

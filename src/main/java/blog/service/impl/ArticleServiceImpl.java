@@ -3,13 +3,10 @@ package blog.service.impl;
 import blog.common.enumeration.StatusCodeEnum;
 import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.mapper.ArticleMapper;
-import blog.pojo.mapper.view.ArticleMainViewMapper;
-import blog.pojo.mapper.view.ArticleSimpleViewMapper;
+import blog.pojo.mapper.view.ArticleViewMapper;
 import blog.pojo.po.Article;
-import blog.pojo.po.ArticleMainView;
-import blog.pojo.po.ArticleSimpleView;
-import blog.pojo.po.Example.ArticleMainViewExample;
-import blog.pojo.po.Example.ArticleSimpleViewExample;
+import blog.pojo.po.ArticleView;
+import blog.pojo.po.Example.ArticleViewExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleService;
 import com.github.pagehelper.PageInfo;
@@ -31,9 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Resource
     private ArticleMapper articleMapper;
     @Resource
-    private ArticleMainViewMapper articleMainViewMapper;
-    @Resource
-    private ArticleSimpleViewMapper articleSimpleViewMapper;
+    private ArticleViewMapper articleViewMapper;
 
     @Override
     public ResponseVO<?> insertArticle(Article article) {
@@ -75,18 +70,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ResponseVO<PageInfo<ArticleMainView>> selectArticle() {
-        List<ArticleMainView> list = articleMainViewMapper.selectByExample(new ArticleMainViewExample());
-        PageInfo<ArticleMainView> pageInfo = new PageInfo<>();
+    public ResponseVO<PageInfo<ArticleView>> selectArticle() {
+        List<ArticleView> list = articleViewMapper.selectByExample(new ArticleViewExample());
+        PageInfo<ArticleView> pageInfo = new PageInfo<>();
         pageInfo.setList(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 
     @Override
-    public ResponseVO<PageInfo<ArticleSimpleView>> selectArticleSimple() {
-        List<ArticleSimpleView> list = articleSimpleViewMapper.selectByExample(new ArticleSimpleViewExample());
-        PageInfo<ArticleSimpleView> pageInfo = new PageInfo<>();
-        pageInfo.setList(list);
-        return ParameterWrapperUtils.successAndRenderData(pageInfo);
+    public ResponseVO<ArticleView> selectArticleById(Integer id) {
+        ArticleViewExample articleViewExample = new ArticleViewExample();
+        articleViewExample.createCriteria().andIdEqualTo(id);
+        List<ArticleView> list = articleViewMapper.selectByExampleWithBLOBs(new ArticleViewExample());
+        return ParameterWrapperUtils.successAndRenderData(list.size()>0?list.get(0):new ArticleView());
     }
+
 }

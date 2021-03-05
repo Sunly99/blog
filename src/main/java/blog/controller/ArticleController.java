@@ -23,8 +23,6 @@ public class ArticleController {
     @Resource
     private ArticleService articleService;
 
-    private static final String ARTICLE_MAIN = "main";
-
     @PostMapping("/add")
     public ResponseVO<?> insertArticle(@RequestBody Article article){
         return articleService.insertArticle(article);
@@ -42,13 +40,13 @@ public class ArticleController {
 
     @GetMapping("/query")
     public ResponseVO<?> selectArticle(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                       @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize,
-                                       @RequestParam(value = "type", defaultValue = "simple") String type){
+                                       @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
         PageHelper.startPage(pageNum, pageSize);
-        if (ARTICLE_MAIN.equals(type)){
-            return articleService.selectArticle();
-        }else {
-            return articleService.selectArticleSimple();
-        }
+        return articleService.selectArticle();
+    }
+
+    @GetMapping("/query/{id}")
+    public ResponseVO<?> selectArticle(@PathVariable Integer id){
+        return articleService.selectArticleById(id);
     }
 }

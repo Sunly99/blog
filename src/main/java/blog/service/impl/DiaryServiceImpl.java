@@ -67,7 +67,7 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public ResponseVO<PageInfo<Diary>> selectDiary() {
-        List<Diary> list = diaryMapper.selectByExample(new DiaryExample());
+        List<Diary> list = diaryMapper.selectByExampleWithBLOBs(new DiaryExample());
         PageInfo<Diary> pageInfo = new PageInfo<>();
         pageInfo.setList(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);

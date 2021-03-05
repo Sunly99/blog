@@ -455,73 +455,73 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNull() {
-            addCriterion("content is null");
+        public Criteria andAboutIsNull() {
+            addCriterion("about is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNotNull() {
-            addCriterion("content is not null");
+        public Criteria andAboutIsNotNull() {
+            addCriterion("about is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContentEqualTo(String value) {
-            addCriterion("content =", value, "content");
+        public Criteria andAboutEqualTo(String value) {
+            addCriterion("about =", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotEqualTo(String value) {
-            addCriterion("content <>", value, "content");
+        public Criteria andAboutNotEqualTo(String value) {
+            addCriterion("about <>", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThan(String value) {
-            addCriterion("content >", value, "content");
+        public Criteria andAboutGreaterThan(String value) {
+            addCriterion("about >", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThanOrEqualTo(String value) {
-            addCriterion("content >=", value, "content");
+        public Criteria andAboutGreaterThanOrEqualTo(String value) {
+            addCriterion("about >=", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThan(String value) {
-            addCriterion("content <", value, "content");
+        public Criteria andAboutLessThan(String value) {
+            addCriterion("about <", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThanOrEqualTo(String value) {
-            addCriterion("content <=", value, "content");
+        public Criteria andAboutLessThanOrEqualTo(String value) {
+            addCriterion("about <=", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentLike(String value) {
-            addCriterion("content like", value, "content");
+        public Criteria andAboutLike(String value) {
+            addCriterion("about like", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotLike(String value) {
-            addCriterion("content not like", value, "content");
+        public Criteria andAboutNotLike(String value) {
+            addCriterion("about not like", value, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentIn(List<String> values) {
-            addCriterion("content in", values, "content");
+        public Criteria andAboutIn(List<String> values) {
+            addCriterion("about in", values, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotIn(List<String> values) {
-            addCriterion("content not in", values, "content");
+        public Criteria andAboutNotIn(List<String> values) {
+            addCriterion("about not in", values, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentBetween(String value1, String value2) {
-            addCriterion("content between", value1, value2, "content");
+        public Criteria andAboutBetween(String value1, String value2) {
+            addCriterion("about between", value1, value2, "about");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotBetween(String value1, String value2) {
-            addCriterion("content not between", value1, value2, "content");
+        public Criteria andAboutNotBetween(String value1, String value2) {
+            addCriterion("about not between", value1, value2, "about");
             return (Criteria) this;
         }
 
@@ -665,52 +665,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopEqualTo(Byte value) {
+        public Criteria andStatusTopEqualTo(Boolean value) {
             addCriterion("status_top =", value, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopNotEqualTo(Byte value) {
+        public Criteria andStatusTopNotEqualTo(Boolean value) {
             addCriterion("status_top <>", value, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopGreaterThan(Byte value) {
+        public Criteria andStatusTopGreaterThan(Boolean value) {
             addCriterion("status_top >", value, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopGreaterThanOrEqualTo(Byte value) {
+        public Criteria andStatusTopGreaterThanOrEqualTo(Boolean value) {
             addCriterion("status_top >=", value, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopLessThan(Byte value) {
+        public Criteria andStatusTopLessThan(Boolean value) {
             addCriterion("status_top <", value, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopLessThanOrEqualTo(Byte value) {
+        public Criteria andStatusTopLessThanOrEqualTo(Boolean value) {
             addCriterion("status_top <=", value, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopIn(List<Byte> values) {
+        public Criteria andStatusTopIn(List<Boolean> values) {
             addCriterion("status_top in", values, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopNotIn(List<Byte> values) {
+        public Criteria andStatusTopNotIn(List<Boolean> values) {
             addCriterion("status_top not in", values, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopBetween(Byte value1, Byte value2) {
+        public Criteria andStatusTopBetween(Boolean value1, Boolean value2) {
             addCriterion("status_top between", value1, value2, "statusTop");
             return (Criteria) this;
         }
 
-        public Criteria andStatusTopNotBetween(Byte value1, Byte value2) {
+        public Criteria andStatusTopNotBetween(Boolean value1, Boolean value2) {
             addCriterion("status_top not between", value1, value2, "statusTop");
             return (Criteria) this;
         }
@@ -725,52 +725,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotEqualTo(Byte value) {
+        public Criteria andStatusHotEqualTo(Boolean value) {
             addCriterion("status_hot =", value, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotNotEqualTo(Byte value) {
+        public Criteria andStatusHotNotEqualTo(Boolean value) {
             addCriterion("status_hot <>", value, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotGreaterThan(Byte value) {
+        public Criteria andStatusHotGreaterThan(Boolean value) {
             addCriterion("status_hot >", value, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotGreaterThanOrEqualTo(Byte value) {
+        public Criteria andStatusHotGreaterThanOrEqualTo(Boolean value) {
             addCriterion("status_hot >=", value, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotLessThan(Byte value) {
+        public Criteria andStatusHotLessThan(Boolean value) {
             addCriterion("status_hot <", value, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotLessThanOrEqualTo(Byte value) {
+        public Criteria andStatusHotLessThanOrEqualTo(Boolean value) {
             addCriterion("status_hot <=", value, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotIn(List<Byte> values) {
+        public Criteria andStatusHotIn(List<Boolean> values) {
             addCriterion("status_hot in", values, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotNotIn(List<Byte> values) {
+        public Criteria andStatusHotNotIn(List<Boolean> values) {
             addCriterion("status_hot not in", values, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotBetween(Byte value1, Byte value2) {
+        public Criteria andStatusHotBetween(Boolean value1, Boolean value2) {
             addCriterion("status_hot between", value1, value2, "statusHot");
             return (Criteria) this;
         }
 
-        public Criteria andStatusHotNotBetween(Byte value1, Byte value2) {
+        public Criteria andStatusHotNotBetween(Boolean value1, Boolean value2) {
             addCriterion("status_hot not between", value1, value2, "statusHot");
             return (Criteria) this;
         }
@@ -785,52 +785,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowEqualTo(Byte value) {
+        public Criteria andStatusShowEqualTo(Boolean value) {
             addCriterion("status_show =", value, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowNotEqualTo(Byte value) {
+        public Criteria andStatusShowNotEqualTo(Boolean value) {
             addCriterion("status_show <>", value, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowGreaterThan(Byte value) {
+        public Criteria andStatusShowGreaterThan(Boolean value) {
             addCriterion("status_show >", value, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowGreaterThanOrEqualTo(Byte value) {
+        public Criteria andStatusShowGreaterThanOrEqualTo(Boolean value) {
             addCriterion("status_show >=", value, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowLessThan(Byte value) {
+        public Criteria andStatusShowLessThan(Boolean value) {
             addCriterion("status_show <", value, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowLessThanOrEqualTo(Byte value) {
+        public Criteria andStatusShowLessThanOrEqualTo(Boolean value) {
             addCriterion("status_show <=", value, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowIn(List<Byte> values) {
+        public Criteria andStatusShowIn(List<Boolean> values) {
             addCriterion("status_show in", values, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowNotIn(List<Byte> values) {
+        public Criteria andStatusShowNotIn(List<Boolean> values) {
             addCriterion("status_show not in", values, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowBetween(Byte value1, Byte value2) {
+        public Criteria andStatusShowBetween(Boolean value1, Boolean value2) {
             addCriterion("status_show between", value1, value2, "statusShow");
             return (Criteria) this;
         }
 
-        public Criteria andStatusShowNotBetween(Byte value1, Byte value2) {
+        public Criteria andStatusShowNotBetween(Boolean value1, Boolean value2) {
             addCriterion("status_show not between", value1, value2, "statusShow");
             return (Criteria) this;
         }
