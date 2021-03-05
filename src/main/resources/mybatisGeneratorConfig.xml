@@ -84,22 +84,22 @@
                      -->
 
 <!--        <table tableName="t_user" domainObjectName="User"/>-->
-<!--        <table tableName="t_article" domainObjectName="Article"/>-->
+        <table tableName="t_article" domainObjectName="Article"/>
 <!--        <table tableName="t_article_category" domainObjectName="ArticleCategory"/>-->
 <!--        <table tableName="t_article_message" domainObjectName="ArticleMessage"/>-->
 <!--        <table tableName="t_diary" domainObjectName="Diary"/>-->
 <!--        <table tableName="t_link" domainObjectName="Link"/>-->
 <!--        <table tableName="t_message" domainObjectName="Message"/>-->
-        <table tableName="t_setting" domainObjectName="Setting"/>
+<!--        <table tableName="t_setting" domainObjectName="Setting"/>-->
 
-<!--        <table tableName="v_article_simple" domainObjectName="ArticleSimpleView"-->
-<!--               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"-->
-<!--               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"-->
-<!--               enableInsert="false"/>-->
-<!--        <table tableName="v_article_main" domainObjectName="ArticleMainView"-->
-<!--               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"-->
-<!--               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"-->
-<!--               enableInsert="false"/>-->
+        <table tableName="v_article_simple" domainObjectName="ArticleSimpleView"
+               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"
+               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"
+               enableInsert="false"/>
+        <table tableName="v_article_main" domainObjectName="ArticleMainView"
+               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"
+               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"
+               enableInsert="false"/>
 <!--        <table tableName="v_message" domainObjectName="MessageView"-->
 <!--               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"-->
 <!--               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"-->

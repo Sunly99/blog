@@ -465,63 +465,63 @@ public class ArticleSimpleViewExample {
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderIsNull() {
-            addCriterion("articale_order is null");
+        public Criteria andArticleOrderIsNull() {
+            addCriterion("article_order is null");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderIsNotNull() {
-            addCriterion("articale_order is not null");
+        public Criteria andArticleOrderIsNotNull() {
+            addCriterion("article_order is not null");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderEqualTo(Integer value) {
-            addCriterion("articale_order =", value, "articaleOrder");
+        public Criteria andArticleOrderEqualTo(Integer value) {
+            addCriterion("article_order =", value, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderNotEqualTo(Integer value) {
-            addCriterion("articale_order <>", value, "articaleOrder");
+        public Criteria andArticleOrderNotEqualTo(Integer value) {
+            addCriterion("article_order <>", value, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderGreaterThan(Integer value) {
-            addCriterion("articale_order >", value, "articaleOrder");
+        public Criteria andArticleOrderGreaterThan(Integer value) {
+            addCriterion("article_order >", value, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderGreaterThanOrEqualTo(Integer value) {
-            addCriterion("articale_order >=", value, "articaleOrder");
+        public Criteria andArticleOrderGreaterThanOrEqualTo(Integer value) {
+            addCriterion("article_order >=", value, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderLessThan(Integer value) {
-            addCriterion("articale_order <", value, "articaleOrder");
+        public Criteria andArticleOrderLessThan(Integer value) {
+            addCriterion("article_order <", value, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderLessThanOrEqualTo(Integer value) {
-            addCriterion("articale_order <=", value, "articaleOrder");
+        public Criteria andArticleOrderLessThanOrEqualTo(Integer value) {
+            addCriterion("article_order <=", value, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderIn(List<Integer> values) {
-            addCriterion("articale_order in", values, "articaleOrder");
+        public Criteria andArticleOrderIn(List<Integer> values) {
+            addCriterion("article_order in", values, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderNotIn(List<Integer> values) {
-            addCriterion("articale_order not in", values, "articaleOrder");
+        public Criteria andArticleOrderNotIn(List<Integer> values) {
+            addCriterion("article_order not in", values, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderBetween(Integer value1, Integer value2) {
-            addCriterion("articale_order between", value1, value2, "articaleOrder");
+        public Criteria andArticleOrderBetween(Integer value1, Integer value2) {
+            addCriterion("article_order between", value1, value2, "articleOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticaleOrderNotBetween(Integer value1, Integer value2) {
-            addCriterion("articale_order not between", value1, value2, "articaleOrder");
+        public Criteria andArticleOrderNotBetween(Integer value1, Integer value2) {
+            addCriterion("article_order not between", value1, value2, "articleOrder");
             return (Criteria) this;
         }
 
