@@ -3,14 +3,11 @@ package blog.controller;
 import blog.pojo.po.Article;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.websocket.server.PathParam;
 
 /**
  * 文章

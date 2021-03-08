@@ -5,6 +5,8 @@ import blog.pojo.po.ArticleView;
 import blog.pojo.vo.common.ResponseVO;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * ArticleService
  *
@@ -52,4 +54,11 @@ public interface ArticleService {
      * @return ResponseVO<PageInfo<Article>> 自定义标准返回类
      */
     ResponseVO<ArticleView> selectArticleById(Integer id);
+
+
+    /**
+     * 查询热门文章列表
+     * @return List<Article> 文章列表
+     */
+    List<Article> selectHotArticle();
 }

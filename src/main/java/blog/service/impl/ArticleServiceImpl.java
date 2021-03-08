@@ -6,6 +6,7 @@ import blog.pojo.mapper.ArticleMapper;
 import blog.pojo.mapper.view.ArticleViewMapper;
 import blog.pojo.po.Article;
 import blog.pojo.po.ArticleView;
+import blog.pojo.po.Example.ArticleExample;
 import blog.pojo.po.Example.ArticleViewExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleService;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ArticleServiceImpl
@@ -84,6 +86,13 @@ public class ArticleServiceImpl implements ArticleService {
         articleViewExample.createCriteria().andIdEqualTo(id);
         List<ArticleView> list = articleViewMapper.selectByExampleWithBLOBs(new ArticleViewExample());
         return ParameterWrapperUtils.successAndRenderData(list.size()>0?list.get(0):new ArticleView());
+    }
+
+    @Override
+    public List<Article> selectHotArticle() {
+        ArticleExample articleExample = new ArticleExample();
+        articleExample.setOrderByClause("counts desc");
+        return articleMapper.selectByExample(articleExample).stream().limit(3).collect(Collectors.toList());
     }
 
 }
