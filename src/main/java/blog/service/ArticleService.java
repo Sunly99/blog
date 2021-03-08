@@ -38,10 +38,12 @@ public interface ArticleService {
 
     /**
      * 查询文章列表
-     *
+     * @param pageNum 当前页码
+     * @param pageSize 分页大小
+     * @param orderBy 分页排序
      * @return ResponseVO<PageInfo<Article>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<ArticleView>> selectArticle();
+    ResponseVO<PageInfo<ArticleView>> selectArticle(Integer pageNum, Integer pageSize, String orderBy);
 
     /**
      * 查询文章内容

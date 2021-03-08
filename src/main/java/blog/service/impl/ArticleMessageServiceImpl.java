@@ -9,6 +9,7 @@ import blog.pojo.po.ArticleMessageView;
 import blog.pojo.po.Example.ArticleMessageViewExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleMessageService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -70,10 +71,10 @@ public class ArticleMessageServiceImpl implements ArticleMessageService {
     }
 
     @Override
-    public ResponseVO<PageInfo<ArticleMessageView>> selectArticleMessage() {
+    public ResponseVO<PageInfo<ArticleMessageView>> selectArticleMessage(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<ArticleMessageView> list = articleMessageViewMapper.selectByExampleWithBLOBs(new ArticleMessageViewExample());
-        PageInfo<ArticleMessageView> pageInfo = new PageInfo<>();
-        pageInfo.setList(list);
+        PageInfo<ArticleMessageView> pageInfo = new PageInfo<>(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

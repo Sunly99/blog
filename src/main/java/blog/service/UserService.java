@@ -38,7 +38,9 @@ public interface UserService {
     /**
      * 查询用户
      *
+     * @param pageNum 当前页码
+     * @param pageSize 分页大小
      * @return ResponseVO<PageInfo<User>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<User>> selectUser();
+    ResponseVO<PageInfo<User>> selectUser(Integer pageNum, Integer pageSize);
 }

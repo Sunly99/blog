@@ -41,7 +41,6 @@ public class ArticleMessageController {
     @GetMapping("/query")
     public ResponseVO<?> selectArticleMessage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        PageHelper.startPage(pageNum, pageSize);
-        return articleMessageService.selectArticleMessage();
+        return articleMessageService.selectArticleMessage(pageNum, pageSize);
     }
 }

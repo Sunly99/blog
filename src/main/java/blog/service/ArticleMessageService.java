@@ -39,7 +39,9 @@ public interface ArticleMessageService {
     /**
      * 查询评论
      *
+     * @param pageNum 当前页码
+     * @param pageSize 分页大小
      * @return ResponseVO<PageInfo<ArticleMessage>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<ArticleMessageView>> selectArticleMessage();
+    ResponseVO<PageInfo<ArticleMessageView>> selectArticleMessage(Integer pageNum, Integer pageSize);
 }

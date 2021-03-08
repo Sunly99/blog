@@ -41,7 +41,6 @@ public class MessageController {
     @GetMapping("/query")
     public ResponseVO<?> selectMessage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                     @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        PageHelper.startPage(pageNum, pageSize);
-        return messageService.selectMessage();
+        return messageService.selectMessage(pageNum, pageSize);
     }
 }

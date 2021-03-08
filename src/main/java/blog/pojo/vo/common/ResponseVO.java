@@ -1,6 +1,7 @@
 package blog.pojo.vo.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

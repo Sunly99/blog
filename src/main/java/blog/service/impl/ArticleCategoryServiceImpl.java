@@ -7,6 +7,7 @@ import blog.pojo.po.ArticleCategory;
 import blog.pojo.po.Example.ArticleCategoryExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleCategoryService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -62,10 +63,10 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     }
 
     @Override
-    public ResponseVO<PageInfo<ArticleCategory>> selectArticleCategory() {
+    public ResponseVO<PageInfo<ArticleCategory>> selectArticleCategory(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<ArticleCategory> list = articleCategoryMapper.selectByExample(new ArticleCategoryExample());
-        PageInfo<ArticleCategory> pageInfo = new PageInfo<>();
-        pageInfo.setList(list);
+        PageInfo<ArticleCategory> pageInfo = new PageInfo<>(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

@@ -41,7 +41,6 @@ public class UserController {
     @GetMapping("/query")
     public ResponseVO<?> selectUser(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        PageHelper.startPage(pageNum, pageSize);
-        return userService.selectUser();
+        return userService.selectUser(pageNum, pageSize);
     }
 }

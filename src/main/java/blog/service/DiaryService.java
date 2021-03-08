@@ -38,7 +38,9 @@ public interface DiaryService {
     /**
      * 查询日记
      *
+     * @param pageNum 当前页码
+     * @param pageSize 分页大小
      * @return ResponseVO<PageInfo<Diary>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<Diary>> selectDiary();
+    ResponseVO<PageInfo<Diary>> selectDiary(Integer pageNum, Integer pageSize);
 }

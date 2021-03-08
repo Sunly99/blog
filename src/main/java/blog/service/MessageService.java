@@ -39,7 +39,9 @@ public interface MessageService {
     /**
      * 查询留言
      *
+     * @param pageNum 当前页码
+     * @param pageSize 分页大小
      * @return ResponseVO<PageInfo<MessageView>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<MessageView>> selectMessage();
+    ResponseVO<PageInfo<MessageView>> selectMessage(Integer pageNum, Integer pageSize);
 }

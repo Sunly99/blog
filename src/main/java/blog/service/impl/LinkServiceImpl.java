@@ -7,6 +7,7 @@ import blog.pojo.po.Example.LinkExample;
 import blog.pojo.po.Link;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.LinkService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -66,10 +67,10 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public ResponseVO<PageInfo<Link>> selectLink() {
+    public ResponseVO<PageInfo<Link>> selectLink(Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<Link> list = linkMapper.selectByExample(new LinkExample());
-        PageInfo<Link> pageInfo = new PageInfo<>();
-        pageInfo.setList(list);
+        PageInfo<Link> pageInfo = new PageInfo<>(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

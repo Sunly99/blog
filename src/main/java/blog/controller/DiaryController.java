@@ -41,7 +41,6 @@ public class DiaryController {
     @GetMapping("/query")
     public ResponseVO<?> selectDiary(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        PageHelper.startPage(pageNum, pageSize);
-        return diaryService.selectDiary();
+        return diaryService.selectDiary(pageNum, pageSize);
     }
 }

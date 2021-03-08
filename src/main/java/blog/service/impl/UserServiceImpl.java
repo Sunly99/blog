@@ -7,6 +7,7 @@ import blog.pojo.po.Example.UserExample;
 import blog.pojo.po.User;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.UserService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -66,10 +67,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseVO<PageInfo<User>> selectUser() {
+    public ResponseVO<PageInfo<User>> selectUser(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<User> list = userMapper.selectByExample(new UserExample());
-        PageInfo<User> pageInfo = new PageInfo<>();
-        pageInfo.setList(list);
+        PageInfo<User> pageInfo = new PageInfo<>(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 }

@@ -41,7 +41,6 @@ public class ArticleCategoryController {
     @GetMapping("/query")
     public ResponseVO<?> selectArticleCategory(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        PageHelper.startPage(pageNum, pageSize);
-        return articleCategoryService.selectArticleCategory();
+        return articleCategoryService.selectArticleCategory(pageNum, pageSize);
     }
 }

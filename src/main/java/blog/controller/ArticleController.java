@@ -3,12 +3,14 @@ package blog.controller;
 import blog.pojo.po.Article;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.websocket.server.PathParam;
 
 /**
  * 文章
@@ -40,9 +42,9 @@ public class ArticleController {
 
     @GetMapping("/query")
     public ResponseVO<?> selectArticle(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                       @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
-        PageHelper.startPage(pageNum, pageSize);
-        return articleService.selectArticle();
+                                       @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize,
+                                       @RequestParam(value = "orderBy", defaultValue = "id") String orderBy){
+        return articleService.selectArticle(pageNum, pageSize, orderBy);
     }
 
     @GetMapping("/query/{id}")

@@ -9,6 +9,7 @@ import blog.pojo.po.ArticleView;
 import blog.pojo.po.Example.ArticleViewExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -70,10 +71,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ResponseVO<PageInfo<ArticleView>> selectArticle() {
+    public ResponseVO<PageInfo<ArticleView>> selectArticle(Integer pageNum, Integer pageSize, String orderBy) {
+        PageHelper.startPage(pageNum, pageSize, orderBy);
         List<ArticleView> list = articleViewMapper.selectByExample(new ArticleViewExample());
-        PageInfo<ArticleView> pageInfo = new PageInfo<>();
-        pageInfo.setList(list);
+        PageInfo<ArticleView> pageInfo = new PageInfo<>(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
     }
 
