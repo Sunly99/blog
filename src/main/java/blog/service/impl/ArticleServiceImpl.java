@@ -5,9 +5,9 @@ import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.mapper.ArticleMapper;
 import blog.pojo.mapper.view.ArticleViewMapper;
 import blog.pojo.po.Article;
-import blog.pojo.po.ArticleView;
-import blog.pojo.po.Example.ArticleExample;
-import blog.pojo.po.Example.ArticleViewExample;
+import blog.pojo.po.example.ArticleExample;
+import blog.pojo.po.view.ArticleView;
+import blog.pojo.po.view.example.ArticleViewExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleService;
 import com.github.pagehelper.PageHelper;
@@ -84,15 +84,40 @@ public class ArticleServiceImpl implements ArticleService {
     public ResponseVO<ArticleView> selectArticleById(Integer id) {
         ArticleViewExample articleViewExample = new ArticleViewExample();
         articleViewExample.createCriteria().andIdEqualTo(id);
-        List<ArticleView> list = articleViewMapper.selectByExampleWithBLOBs(new ArticleViewExample());
+        List<ArticleView> list = articleViewMapper.selectByExampleWithBLOBs(articleViewExample);
         return ParameterWrapperUtils.successAndRenderData(list.size()>0?list.get(0):new ArticleView());
     }
 
     @Override
-    public List<Article> selectHotArticle() {
+    public List<Article> selectHotArticle(Integer limit) {
         ArticleExample articleExample = new ArticleExample();
+        articleExample.createCriteria().andStatusShowEqualTo(true);
         articleExample.setOrderByClause("counts desc");
-        return articleMapper.selectByExample(articleExample).stream().limit(3).collect(Collectors.toList());
+        return articleMapper.selectByExample(articleExample).stream().limit(limit).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Article> selectTopArticle(Integer limit) {
+        ArticleExample articleExample = new ArticleExample();
+        articleExample.createCriteria().andStatusTopEqualTo(true).andStatusShowEqualTo(true);
+        articleExample.setOrderByClause("update_time desc");
+        return articleMapper.selectByExample(articleExample).stream().limit(limit).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ArticleView> selectArticle() {
+        ArticleViewExample articleViewExample = new ArticleViewExample();
+        articleViewExample.createCriteria().andStatusShowEqualTo(true);
+        articleViewExample.setOrderByClause("status_top desc,update_time desc");
+        return articleViewMapper.selectByExample(articleViewExample);
+    }
+
+    @Override
+    public List<ArticleView> selectArticle(Integer id) {
+        ArticleViewExample articleViewExample = new ArticleViewExample();
+        articleViewExample.createCriteria().andCategoryIdEqualTo(id).andStatusShowEqualTo(true);
+        articleViewExample.setOrderByClause("status_top desc,update_time desc");
+        return articleViewMapper.selectByExample(articleViewExample);
     }
 
 }

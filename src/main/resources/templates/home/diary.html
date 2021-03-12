@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Sunly" />
+    <meta name="robots" content="all" />
+    <title>日记</title>
+    <link rel="stylesheet" href="../../static/home/font-awesome/css/font-awesome.min.css" th:href="@{~/home/font-awesome/css/font-awesome.min.css}" />
+    <link rel="stylesheet" href="../../static/home/layui/css/layui.css" th:href="@{~/home/layui/css/layui.css}" />
+    <link rel="stylesheet" href="../../static/home/css/master.css" th:href="@{~/home/css/master.css}" />
+    <link rel="stylesheet" href="../../static/home/css/gloable.css" th:href="@{~/home/css/gloable.css}" />
+    <link rel="stylesheet" href="../../static/home/css/nprogress.css" th:href="@{~/home/css/nprogress.css}" />
+    <link rel="stylesheet" href="../../static/home/css/timeline.css" th:href="@{~/home/css/timeline.css}" />
+</head>
+<body>
+    <div class="header">
+    </div>
+    <header class="gird-header">
+        <div class="header-fixed">
+            <div class="header-inner">
+                <a href="javascript:void(0)" class="header-logo" id="logo">Sunly</a>
+                <nav class="nav" id="nav">
+                    <ul>
+                        <li><a href="index.html" th:href="@{/home/index}">首页</a></li>
+                        <li><a href="article.html" th:href="@{/home/article}">博客</a></li>
+                        <li><a href="message.html" th:href="@{/home/message}">留言</a></li>
+                        <li><a href="diary.html" th:href="@{/home/diary}">日记</a></li>
+                        <li><a href="link.html" th:href="@{/home/link}">友链</a></li>
+                        <li><a href="about.html" th:href="@{/home/about}">关于</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="blog-user">
+                    <i class="fa fa-qq"></i>
+                </a>
+                <a class="phone-menu">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="doc-container" id="doc-container">
+         <div class="container-fixed">
+            <div class="timeline-box shadow">
+                <div class="timeline-main">
+                    <h1><i class="fa fa-clock-o"></i>日记</h1>
+                    <div class="timeline-line"></div>
+                        <div class="timeline-year" th:each="diaryYear:${diaries}">
+                            <h2><a class="yearToggle" th:utext="${diaryYear.year}">2021 年</a><i class="fa fa-caret-down fa-fw"></i></h2>
+                            <div class="timeline-month">
+                                <ul>
+                                    <li th:each="diary:${diaryYear.diaryList}">
+                                        <div class="h4 animated fadeInLeft">
+                                            <p class="date" th:utext="${#dates.format(diary.createTime, 'yyyy-MM-dd')}">10月16日</p>
+                                        </div>
+                                            <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                                        <div class="content animated fadeInRight" th:utext="${diary.content}">江湖路远，有缘再见。</div>
+                                        <div class="clear"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <h1 style="padding-top:4px;padding-bottom:2px;margin-top:40px;"><i class="fa fa-hourglass-end"></i>THE END</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="grid-footer">
+        <div class="footer-fixed">
+            <div class="copyright">
+                <div class="info">
+                    <div class="contact">
+                        <a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" class="qq" target="_blank" ><i class="fa fa-qq"></i></a>
+                        <a href="#" class="email" target="_blank" ><i class="fa fa-envelope"></i></a>
+                        <a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>
+                    </div>
+                    <p class="mt05">
+                        Copyright &copy; 2021-2031 小仙女 All Rights Reserved V.1.0.0 浙ICP备xxx号
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../static/home/layui/layui.js" th:src="@{~/home/layui/layui.js}"></script>
+    <script src="../../static/home/js/yss/gloable.js" th:src="@{~/home/js/yss/gloable.js}"></script>
+    <script src="../../static/home/js/plugins/nprogress.js" th:src="@{~/home/js/plugins/nprogress.js}"></script>
+    <script>
+        /*<![CDATA[*/
+        NProgress.start();
+        /*]]>*/
+    </script>
+    <script src="../../static/home/js/pagediary.js" th:src="@{~/home/js/pagediary.js}"></script>
+    <script>
+        /*<![CDATA[*/
+        window.onload = function () {
+            NProgress.done();
+        };
+        /*]]>*/
+    </script>
+</body>
+</html>

@@ -2,7 +2,10 @@ package blog.service;
 
 import blog.pojo.po.Diary;
 import blog.pojo.vo.common.ResponseVO;
+import blog.pojo.vo.home.diary.HomeDiaryVO;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
  * DiaryService
@@ -43,4 +46,11 @@ public interface DiaryService {
      * @return ResponseVO<PageInfo<Diary>> 自定义标准返回类
      */
     ResponseVO<PageInfo<Diary>> selectDiary(Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询日记
+     *
+     * @return List<HomeDiaryVO> 自定日记返回类
+     */
+    List<HomeDiaryVO> selectDiary();
 }

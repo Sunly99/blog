@@ -4,6 +4,8 @@ import blog.pojo.po.ArticleCategory;
 import blog.pojo.vo.common.ResponseVO;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * ArticleCategoryService
  *
@@ -42,4 +44,11 @@ public interface ArticleCategoryService {
      * @return ResponseVO<PageInfo<ArticleCategory>> 自定义分类查询返回类
      */
     ResponseVO<PageInfo<ArticleCategory>> selectArticleCategory(Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询类型列表
+     *
+     * @return List<ArticleCategory> 分类列表
+     */
+    List<ArticleCategory> selectArticleCategory();
 }

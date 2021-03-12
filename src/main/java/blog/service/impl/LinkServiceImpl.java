@@ -3,8 +3,8 @@ package blog.service.impl;
 import blog.common.enumeration.StatusCodeEnum;
 import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.mapper.LinkMapper;
-import blog.pojo.po.Example.LinkExample;
 import blog.pojo.po.Link;
+import blog.pojo.po.example.LinkExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.LinkService;
 import com.github.pagehelper.PageHelper;
@@ -72,5 +72,12 @@ public class LinkServiceImpl implements LinkService {
         List<Link> list = linkMapper.selectByExample(new LinkExample());
         PageInfo<Link> pageInfo = new PageInfo<>(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
+    }
+
+    @Override
+    public List<Link> selectLink() {
+        LinkExample linkExample = new LinkExample();
+        linkExample.createCriteria().andStatusEqualTo(true);
+        return linkMapper.selectByExample(linkExample);
     }
 }

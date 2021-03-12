@@ -4,6 +4,8 @@ import blog.pojo.po.Link;
 import blog.pojo.vo.common.ResponseVO;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 
 /**
  * LinkService
@@ -44,4 +46,12 @@ public interface LinkService {
      * @return ResponseVO<PageInfo<Link>> 自定义标准返回类
      */
     ResponseVO<PageInfo<Link>> selectLink(Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询友链列表-不分页
+     *
+     * @return List<Link> 友链列表
+     */
+    List<Link> selectLink();
+
 }

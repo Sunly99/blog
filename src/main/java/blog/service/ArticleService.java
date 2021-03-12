@@ -1,7 +1,7 @@
 package blog.service;
 
 import blog.pojo.po.Article;
-import blog.pojo.po.ArticleView;
+import blog.pojo.po.view.ArticleView;
 import blog.pojo.vo.common.ResponseVO;
 import com.github.pagehelper.PageInfo;
 
@@ -58,7 +58,32 @@ public interface ArticleService {
 
     /**
      * 查询热门文章列表
+     *
+     * @param limit 展示条数
      * @return List<Article> 文章列表
      */
-    List<Article> selectHotArticle();
+    List<Article> selectHotArticle(Integer limit);
+
+    /**
+     * 查询置顶文章列表
+     *
+     * @param limit 展示条数
+     * @return List<Article> 文章列表
+     */
+    List<Article> selectTopArticle(Integer limit);
+
+    /**
+     * 查询文章列表
+     *
+     * @return List<Article> 文章列表
+     */
+    List<ArticleView> selectArticle();
+
+    /**
+     * 根据文章类别查询文章列表
+     *
+     * @param id 文章类别id
+     * @return List<Article> 文章列表
+     */
+    List<ArticleView> selectArticle(Integer id);
 }

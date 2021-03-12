@@ -4,7 +4,7 @@ import blog.common.enumeration.StatusCodeEnum;
 import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.mapper.ArticleCategoryMapper;
 import blog.pojo.po.ArticleCategory;
-import blog.pojo.po.Example.ArticleCategoryExample;
+import blog.pojo.po.example.ArticleCategoryExample;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleCategoryService;
 import com.github.pagehelper.PageHelper;
@@ -68,5 +68,12 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
         List<ArticleCategory> list = articleCategoryMapper.selectByExample(new ArticleCategoryExample());
         PageInfo<ArticleCategory> pageInfo = new PageInfo<>(list);
         return ParameterWrapperUtils.successAndRenderData(pageInfo);
+    }
+
+    @Override
+    public List<ArticleCategory> selectArticleCategory() {
+        ArticleCategoryExample articleCategoryExample = new ArticleCategoryExample();
+        articleCategoryExample.createCriteria().andStatusEqualTo(true);
+        return articleCategoryMapper.selectByExample(articleCategoryExample);
     }
 }
