@@ -66,114 +66,53 @@
     <div class="f-cb"></div>
     <div class="mt20">
         <ul class="message-list" id="message-list">
-            <li class="zoomIn article"> 
+            <li class="zoomIn article" th:each="message:${messages}">
                 <div class="comment-parent">
                     <a name="remark-1"></a>
-                    <img src="https://thirdqq.qlogo.cn/qqapp/101465933/7627F745B95BFAC18C6C481FE72B4EB1/100" />
+                    <img src="https://thirdqq.qlogo.cn/qqapp/101465933/7627F745B95BFAC18C6C481FE72B4EB1/100" th:src="${message.message.userAvatar}" />
                     <div class="info">
-                        <span class="username">小仙女</span>
+                        <span class="username" th:utext="${message.message.username}">小仙女</span>
                     </div>
-                    <div class="comment-content">
+                    <div class="comment-content" th:utext="${message.message.content}">
                         剑气纵横三万里
                     </div>
                     <p class="info info-footer">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span>四川</span> 
-                        <span class="comment-time">2018-01-01</span>
-                        <a href="javascript:;" class="btn-reply" data-targetid="1" data-targetname="小仙女">回复</a>
+<!--                        <span>四川</span> -->
+                        <span class="comment-time" th:utext="${#dates.format(message.message.createTime, 'yyyy-MM-dd')}">2018-01-01</span>
+                        <a href="javascript:;" class="btn-reply" data-targetid="1" th:data-targetid="${message.message.userId}" data-targetname="小仙女" th:data-targetname="${message.message.username}">回复</a>
                     </p>
                 </div>
                 <hr />
-                <div class="comment-child"> 
+                <div class="comment-child" th:each="answer:${message.answers}">
                     <a name="reply-1"></a> 
-                    <img src="https://thirdqq.qlogo.cn/qqapp/101465933/7627F745B95BFAC18C6C481FE72B4EB1/100"> 
+                    <img src="https://thirdqq.qlogo.cn/qqapp/101465933/7627F745B95BFAC18C6C481FE72B4EB1/100" th:src="${message.message.userAvatar}">
                     <div class="info"> 
-                        <span class="username">燕十四</span> 
+                        <span class="username" th:utext="${answer.userName}">燕十四</span>
                         <span style="padding-right:0;margin-left:-5px;">回复</span> 
-                        <span class="username">小仙女</span> 
-                        <span>一剑光寒十九洲</span> 
+                        <span class="username" th:utext="${answer.sendUserName}">小仙女</span>
+                        <span th:utext="${answer.content}">一剑光寒十九洲</span>
                     </div> 
                     <p class="info"> 
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span>四川</span> 
-                        <span class="comment-time">2018-01-01</span> 
-                        <a href="javascript:;" class="btn-reply" data-targetid="2" data-targetname="燕十四">回复</a>
+<!--                        <span>四川</span> -->
+                        <span class="comment-time" th:utext="${#dates.format(answer.createTime, 'yyyy-MM-dd')}">2018-01-01</span>
+                        <a href="javascript:;" class="btn-reply" data-targetid="2" th:data-targetid="${answer.userId}" data-targetname="燕十四" th:data-targetname="${answer.userName}">回复</a>
                     </p> 
-                </div> 
-                <div class="replycontainer layui-hide"> 
-                    <form class="layui-form" action=""> 
-                        <input type="hidden" name="remarkId" value="1"> 
-                        <input type="hidden" name="targetUserId" value="0"> 
-                        <div class="layui-form-item"> 
-                            <textarea name="replyContent" lay-verify="replyContent" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;"></textarea> 
+                </div>
+                <div class="replycontainer layui-hide">
+                    <form action="#">
+                        <input type="hidden" name="messageId" id="messageId" th:value="${message.message.id}">
+                        <div>
+                            <textarea name="content" id="content" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;"></textarea>
                         </div> 
-                        <div class="layui-form-item"> 
-                            <button class="layui-btn layui-btn-xs" lay-submit="formReply" lay-filter="formReply">提交</button> 
+                        <div>
+                            <button class="layui-btn layui-btn-xs" onclick="answerSubmit();">提交</button>
                         </div> 
                     </form> 
                 </div>
             </li>
-            <li class="zoomIn article"> 
-                <div class="comment-parent">
-                    <a name="remark-1"></a>
-                    <img src="https://thirdqq.qlogo.cn/qqapp/101465933/7627F745B95BFAC18C6C481FE72B4EB1/100" alt="{{name}}" />
-                    <div class="info">
-                        <span class="username">小仙女</span>
-                    </div>
-                    <div class="comment-content">
-                        剑气纵横三万里
-                    </div>
-                    <p class="info info-footer">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span>四川</span> 
-                        <span class="comment-time">2018-01-01</span>
-                        <a href="javascript:;" class="btn-reply" data-targetid="1" data-targetname="小仙女">回复</a>
-                    </p>
-                </div>
-                <div class="replycontainer layui-hide"> 
-                    <form class="layui-form" action=""> 
-                        <input type="hidden" name="remarkId" value="1"> 
-                        <input type="hidden" name="targetUserId" value="0"> 
-                        <div class="layui-form-item"> 
-                            <textarea name="replyContent" lay-verify="replyContent" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;"></textarea> 
-                        </div> 
-                        <div class="layui-form-item"> 
-                            <button class="layui-btn layui-btn-xs" lay-submit="formReply" lay-filter="formReply">提交</button> 
-                        </div> 
-                    </form> 
-                </div>
-            </li>
-            <li class="zoomIn article"> 
-                <div class="comment-parent">
-                    <a name="remark-1"></a>
-                    <img src="https://thirdqq.qlogo.cn/qqapp/101465933/7627F745B95BFAC18C6C481FE72B4EB1/100"/>
-                    <div class="info">
-                        <span class="username">小仙女</span>
-                    </div>
-                    <div class="comment-content">
-                        剑气纵横三万里
-                    </div>
-                    <p class="info info-footer">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span>四川</span> 
-                        <span class="comment-time">2018-01-01</span>
-                        <a href="javascript:;" class="btn-reply" data-targetid="1" data-targetname="小仙女">回复</a>
-                    </p>
-                </div>
-                <hr />
-                <div class="replycontainer layui-hide"> 
-                    <form class="layui-form" action=""> 
-                        <input type="hidden" name="remarkId" value="1"> 
-                        <input type="hidden" name="targetUserId" value="0"> 
-                        <div class="layui-form-item"> 
-                            <textarea name="replyContent" lay-verify="replyContent" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;"></textarea> 
-                        </div> 
-                        <div class="layui-form-item"> 
-                            <button class="layui-btn layui-btn-xs" lay-submit="formReply" lay-filter="formReply">提交</button> 
-                        </div> 
-                    </form> 
-                </div>
-            </li>
+
         </ul>
     </div>
 </div>
@@ -198,12 +137,7 @@
     <script src="../../static/home/layui/layui.js" th:src="@{~/home/layui/layui.js}"></script>
     <script src="../../static/home/js/yss/gloable.js" th:src="@{~/home/js/yss/gloable.js}"></script>
     <script src="../../static/home/js/plugins/nprogress.js" th:src="@{~/home/js/plugins/nprogress.js}"></script>
-    <script type="text/javascript" th:inline="javascript">
-        /*<![CDATA[*/
-        NProgress.start();
-        /*]]>*/
-    </script>
-    <script src="../../static/home/js/pagemessage.js" th:src="@{~/home/js/pagemessage.js}"></script>
+    <script src="../../static/home/js/message.js" th:src="@{~/home/js/message.js}"></script>
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
         NProgress.start();
@@ -214,6 +148,31 @@
         window.onload = function () {
             NProgress.done();
         };
+        /*]]>*/
+    </script>
+
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        function answerSubmit() {
+            let messageId = $('#messageId').val();
+            let content = $('#contact').val();
+            let url = "/answer/add";
+            alert(url);
+            $.ajax({
+                url:url,
+                type:"POST",
+                data:{
+                    messageId:messageId,
+                    content:content
+                },
+                contentType:"application/json",
+                success:function(rsp){
+                    alert(rsp);
+                },
+                dataType:"json"
+            })
+            alert(2);
+        }
         /*]]>*/
     </script>
 </body>

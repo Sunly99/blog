@@ -70,11 +70,10 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public ResponseVO<PageInfo<Diary>> selectDiary(Integer pageNum, Integer pageSize) {
+    public PageInfo<Diary> selectDiary(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Diary> list = diaryMapper.selectByExampleWithBLOBs(new DiaryExample());
-        PageInfo<Diary> pageInfo = new PageInfo<>(list);
-        return ParameterWrapperUtils.successAndRenderData(pageInfo);
+        return new PageInfo<>(list);
     }
 
     @Override

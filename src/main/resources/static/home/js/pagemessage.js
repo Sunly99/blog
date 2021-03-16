@@ -1,5 +1,5 @@
 ﻿var area;
-layui.use(['element', 'jquery', 'form', 'layedit', 'flow'], function () {
+layui.use(['element', 'jquery', 'layedit', 'flow'], function () {
     var element = layui.element;
     var form = layui.form;
     var $ = layui.jquery;

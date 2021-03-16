@@ -43,9 +43,9 @@ public interface LinkService {
      *
      * @param pageNum 当前页码
      * @param pageSize 分页大小
-     * @return ResponseVO<PageInfo<Link>> 自定义标准返回类
+     * @return PageInfo<Link> 自定义标准返回类
      */
-    ResponseVO<PageInfo<Link>> selectLink(Integer pageNum, Integer pageSize);
+    PageInfo<Link> selectLink(Integer pageNum, Integer pageSize);
 
     /**
      * 查询友链列表-不分页

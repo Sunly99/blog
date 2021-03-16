@@ -1,15 +1,14 @@
 package blog.controller;
 
-import blog.service.ArticleCategoryService;
-import blog.service.ArticleService;
-import blog.service.DiaryService;
-import blog.service.LinkService;
+import blog.pojo.vo.home.answer.MessageAnswerVO;
+import blog.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author sly
@@ -25,6 +24,8 @@ public class HomeController {
     private DiaryService diaryService;
     @Resource
     private ArticleCategoryService articleCategoryService;
+    @Resource
+    private AnswerService answerService;
 
     @RequestMapping("/index")
     public String indexPage(Model model){
@@ -45,7 +46,9 @@ public class HomeController {
     }
 
     @RequestMapping("/message")
-    public String messagePage(){
+    public String messagePage(Model model){
+        List<MessageAnswerVO> messageAnswerVOList = answerService.selectAnswer(false,null);
+        model.addAttribute("messages", messageAnswerVOList);
         return "home/message";
     }
 
@@ -69,7 +72,7 @@ public class HomeController {
 
     @RequestMapping("/read/{id}")
     public String readPage(@PathVariable Integer id,Model model){
-        model.addAttribute("article",articleService.selectArticleById(id).getData());
+        model.addAttribute("article",articleService.selectArticleById(id));
         return "home/read";
     }
 

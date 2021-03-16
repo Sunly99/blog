@@ -45,7 +45,7 @@ public interface ArticleService {
      * @param orderBy 分页排序
      * @return ResponseVO<PageInfo<Article>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<ArticleView>> selectArticle(Integer pageNum, Integer pageSize, String orderBy);
+    PageInfo<ArticleView> selectArticle(Integer pageNum, Integer pageSize, String orderBy);
 
     /**
      * 查询文章内容
@@ -53,7 +53,7 @@ public interface ArticleService {
      * @param id 文章编号
      * @return ResponseVO<PageInfo<Article>> 自定义标准返回类
      */
-    ResponseVO<ArticleView> selectArticleById(Integer id);
+    ArticleView selectArticleById(Integer id);
 
 
     /**

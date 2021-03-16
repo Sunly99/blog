@@ -3,6 +3,7 @@ package blog.controller;
 import blog.pojo.po.Diary;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.DiaryService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,8 @@ public class DiaryController {
     }
 
     @GetMapping("/query")
-    public ResponseVO<?> selectDiary(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                     @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
+    public PageInfo<Diary> selectDiary(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                       @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
         return diaryService.selectDiary(pageNum, pageSize);
     }
 }

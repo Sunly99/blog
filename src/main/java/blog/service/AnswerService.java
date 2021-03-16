@@ -1,10 +1,11 @@
 package blog.service;
 
 import blog.pojo.po.Answer;
-import blog.pojo.po.Message;
-import blog.pojo.po.view.MessageView;
 import blog.pojo.vo.common.ResponseVO;
+import blog.pojo.vo.home.answer.MessageAnswerVO;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
  * AnswerService
@@ -27,7 +28,7 @@ public interface AnswerService {
      * @param id 回复Id
      * @return ResponseVO<?> 自定义标准返回类
      */
-    ResponseVO<?> deleteMessage(Integer id);
+    ResponseVO<?> deleteAnswer(Integer id);
 
     /**
      * 修改回复
@@ -42,7 +43,16 @@ public interface AnswerService {
      *
      * @param pageNum 当前页码
      * @param pageSize 分页大小
-     * @return PageInfo<MessageView> 自定义标准返回类
+     * @return PageInfo<Answer> 自定义标准返回类
      */
-    PageInfo<MessageView> selectAnswer(Integer pageNum, Integer pageSize);
+    PageInfo<Answer> selectAnswer(Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询回复
+     *
+     * @param articleId 文章Id
+     * @param isArticleMessageType 留言/评论 类型，0 留言，1评论
+     * @return List<Answer> 自定义标准返回类
+     */
+    List<MessageAnswerVO> selectAnswer(Boolean isArticleMessageType, Integer articleId);
 }

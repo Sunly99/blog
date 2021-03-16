@@ -3,6 +3,7 @@ package blog.controller;
 import blog.pojo.po.Link;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.LinkService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class LinkController {
     }
 
     @GetMapping("/query")
-    public ResponseVO<?> selectLink(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+    public PageInfo<Link> selectLink(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
         return linkService.selectLink(pageNum, pageSize);
     }

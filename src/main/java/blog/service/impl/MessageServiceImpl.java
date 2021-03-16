@@ -2,11 +2,16 @@ package blog.service.impl;
 
 import blog.common.enumeration.StatusCodeEnum;
 import blog.common.util.ParameterWrapperUtils;
-import blog.pojo.mapper.LinkMapper;
+import blog.pojo.mapper.MessageMapper;
+import blog.pojo.mapper.view.MessageViewMapper;
 import blog.pojo.po.Link;
+import blog.pojo.po.Message;
 import blog.pojo.po.example.LinkExample;
+import blog.pojo.po.example.MessageExample;
+import blog.pojo.po.view.MessageView;
+import blog.pojo.po.view.example.MessageViewExample;
 import blog.pojo.vo.common.ResponseVO;
-import blog.service.LinkService;
+import blog.service.MessageService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.log4j.Log4j2;
@@ -17,66 +22,62 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * LinkServiceImpl
+ * MessageServiceImpl
  *
  * @author sly
  */
 @Log4j2
 @Service
-public class LinkServiceImpl implements LinkService {
+public class MessageServiceImpl implements MessageService {
     @Resource
-    private LinkMapper linkMapper;
+    private MessageMapper messageMapper;
+
+    @Resource
+    private MessageViewMapper messageViewMapper;
 
     @Override
-    public ResponseVO<?> insertLink(Link link) {
+    public ResponseVO<?> insertMessage(Message message) {
         int count;
         try{
             Date date = new Date();
-            link.setCreateTime(date);
-            link.setUpdateTime(date);
-            count = linkMapper.insertSelective(link);
+            message.setCreateTime(date);
+            message.setUpdateTime(date);
+            count = messageMapper.insertSelective(message);
         }catch (Exception e){
-            log.error("LinkServiceImpl:insertLink \n" + e.getMessage());
+            log.error("MessageServiceImpl:insertMessage \n" + e.getMessage());
             return ParameterWrapperUtils.putCode2ResponseVO(StatusCodeEnum.DATABASE_INSERT_FAIL,e);
         }
         return ParameterWrapperUtils.successAndRenderData(count);
     }
 
     @Override
-    public ResponseVO<?> deleteLink(Integer id) {
+    public ResponseVO<?> deleteMessage(Integer id) {
         int count;
         try{
-            count = linkMapper.deleteByPrimaryKey(id);
+            count = messageMapper.deleteByPrimaryKey(id);
         }catch (Exception e){
-            log.error("LinkServiceImpl:deleteLink \n" + e.getMessage());
+            log.error("MessageServiceImpl:deleteMessage \n" + e.getMessage());
             return ParameterWrapperUtils.putCode2ResponseVO(StatusCodeEnum.DATABASE_DELETE_FAIL,e);
         }
         return ParameterWrapperUtils.successAndRenderData(count);
     }
 
     @Override
-    public ResponseVO<?> updateLink(Link link) {
+    public ResponseVO<?> updateMessage(Message message) {
         int count;
         try{
-            count = linkMapper.updateByPrimaryKeySelective(link);
+            count = messageMapper.updateByPrimaryKeySelective(message);
         }catch (Exception e){
-            log.error("LinkServiceImpl:updateLink \n" + e.getMessage());
+            log.error("MessageServiceImpl:updateMessage \n" + e.getMessage());
             return ParameterWrapperUtils.putCode2ResponseVO(StatusCodeEnum.DATABASE_UPDATE_FAIL,e);
         }
         return ParameterWrapperUtils.successAndRenderData(count);
     }
 
     @Override
-    public PageInfo<Link> selectLink(Integer pageNum,Integer pageSize) {
+    public PageInfo<MessageView> selectMessage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Link> list = linkMapper.selectByExample(new LinkExample());
-        return  new PageInfo<>(list);
-    }
-
-    @Override
-    public List<Link> selectLink() {
-        LinkExample linkExample = new LinkExample();
-        linkExample.createCriteria().andStatusEqualTo(true);
-        return linkMapper.selectByExample(linkExample);
+        List<MessageView> list = messageViewMapper.selectByExample(new MessageViewExample());
+        return new PageInfo<>(list);
     }
 }

@@ -41,9 +41,9 @@ public interface ArticleCategoryService {
      * 查询文章类型
      * @param pageNum 当前页码
      * @param pageSize 分页大小
-     * @return ResponseVO<PageInfo<ArticleCategory>> 自定义分类查询返回类
+     * @return PageInfo<ArticleCategory> 自定义分类查询返回类
      */
-    ResponseVO<PageInfo<ArticleCategory>> selectArticleCategory(Integer pageNum, Integer pageSize);
+    PageInfo<ArticleCategory> selectArticleCategory(Integer pageNum, Integer pageSize);
 
     /**
      * 查询类型列表

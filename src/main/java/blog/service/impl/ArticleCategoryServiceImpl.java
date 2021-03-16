@@ -63,11 +63,10 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     }
 
     @Override
-    public ResponseVO<PageInfo<ArticleCategory>> selectArticleCategory(Integer pageNum, Integer pageSize) {
+    public PageInfo<ArticleCategory> selectArticleCategory(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<ArticleCategory> list = articleCategoryMapper.selectByExample(new ArticleCategoryExample());
-        PageInfo<ArticleCategory> pageInfo = new PageInfo<>(list);
-        return ParameterWrapperUtils.successAndRenderData(pageInfo);
+        return new PageInfo<>(list);
     }
 
     @Override

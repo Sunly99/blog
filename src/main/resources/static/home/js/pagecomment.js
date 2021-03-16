@@ -1,4 +1,4 @@
-﻿layui.use(['element', 'jquery', 'form', 'layedit', 'flow'], function () {
+﻿layui.use(['element', 'jquery', 'layedit', 'flow'], function () {
     var form = layui.form;
     var $ = layui.jquery;
     var layedit = layui.layedit;

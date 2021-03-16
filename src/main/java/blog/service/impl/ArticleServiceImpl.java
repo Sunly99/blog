@@ -73,19 +73,18 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ResponseVO<PageInfo<ArticleView>> selectArticle(Integer pageNum, Integer pageSize, String orderBy) {
+    public PageInfo<ArticleView> selectArticle(Integer pageNum, Integer pageSize, String orderBy) {
         PageHelper.startPage(pageNum, pageSize, orderBy);
         List<ArticleView> list = articleViewMapper.selectByExample(new ArticleViewExample());
-        PageInfo<ArticleView> pageInfo = new PageInfo<>(list);
-        return ParameterWrapperUtils.successAndRenderData(pageInfo);
+        return new PageInfo<>(list);
     }
 
     @Override
-    public ResponseVO<ArticleView> selectArticleById(Integer id) {
+    public ArticleView selectArticleById(Integer id) {
         ArticleViewExample articleViewExample = new ArticleViewExample();
         articleViewExample.createCriteria().andIdEqualTo(id);
         List<ArticleView> list = articleViewMapper.selectByExampleWithBLOBs(articleViewExample);
-        return ParameterWrapperUtils.successAndRenderData(list.size()>0?list.get(0):new ArticleView());
+        return list.size()>0?list.get(0):new ArticleView();
     }
 
     @Override

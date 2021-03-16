@@ -3,6 +3,7 @@ package blog.controller;
 import blog.pojo.po.ArticleCategory;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.ArticleCategoryService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,8 @@ public class ArticleCategoryController {
     }
 
     @GetMapping("/query")
-    public ResponseVO<?> selectArticleCategory(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                               @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
+    public PageInfo<ArticleCategory> selectArticleCategory(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                           @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
         return articleCategoryService.selectArticleCategory(pageNum, pageSize);
     }
 }
