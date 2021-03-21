@@ -27,10 +27,12 @@ public enum StatusCodeEnum {
     // 数据库读取失败
     DATABASE_SELECT_FAIL(500.4,"数据库查询失败"),
 
+    // 登录-用户未登录
+    LOGIN_USER_NOT_LOGIN(200.1,"用户未登录"),
     // 登录-用户不存在
-    LOGIN_USER_NOT_EXIST(200.1,"用户不存在"),
+    LOGIN_USER_NOT_EXIST(200.2,"用户不存在"),
     // 登录-用户名或密码错误
-    LOGIN_PASSWORD_ERROR(200.2,"用户名或密码错误");
+    LOGIN_PASSWORD_ERROR(200.3,"用户名或密码错误");
 
 
     private final double code;

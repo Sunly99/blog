@@ -4,10 +4,7 @@ import blog.common.enumeration.StatusCodeEnum;
 import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.mapper.MessageMapper;
 import blog.pojo.mapper.view.MessageViewMapper;
-import blog.pojo.po.Link;
 import blog.pojo.po.Message;
-import blog.pojo.po.example.LinkExample;
-import blog.pojo.po.example.MessageExample;
 import blog.pojo.po.view.MessageView;
 import blog.pojo.po.view.example.MessageViewExample;
 import blog.pojo.vo.common.ResponseVO;
@@ -42,6 +39,7 @@ public class MessageServiceImpl implements MessageService {
             Date date = new Date();
             message.setCreateTime(date);
             message.setUpdateTime(date);
+            message.setStatus(true);
             count = messageMapper.insertSelective(message);
         }catch (Exception e){
             log.error("MessageServiceImpl:insertMessage \n" + e.getMessage());

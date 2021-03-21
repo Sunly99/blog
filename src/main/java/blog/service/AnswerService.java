@@ -2,7 +2,6 @@ package blog.service;
 
 import blog.pojo.po.Answer;
 import blog.pojo.vo.common.ResponseVO;
-import blog.pojo.vo.home.answer.MessageAnswerVO;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -47,12 +46,5 @@ public interface AnswerService {
      */
     PageInfo<Answer> selectAnswer(Integer pageNum, Integer pageSize);
 
-    /**
-     * 查询回复
-     *
-     * @param articleId 文章Id
-     * @param isArticleMessageType 留言/评论 类型，0 留言，1评论
-     * @return List<Answer> 自定义标准返回类
-     */
-    List<MessageAnswerVO> selectAnswer(Boolean isArticleMessageType, Integer articleId);
+
 }

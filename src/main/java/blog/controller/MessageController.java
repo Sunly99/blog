@@ -1,5 +1,7 @@
 package blog.controller;
 
+import blog.common.enumeration.StatusCodeEnum;
+import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.po.Message;
 import blog.pojo.po.view.MessageView;
 import blog.pojo.vo.common.ResponseVO;
@@ -10,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * 留言/评论
@@ -25,7 +28,13 @@ public class MessageController {
     private MessageService messageService;
 
     @PostMapping("/add")
-    public ResponseVO<?> insertMessage(@RequestBody Message message){
+    public ResponseVO<?> insertMessage(@RequestBody Message message, HttpSession session){
+        Object userId = session.getAttribute("userId");
+        if (null == userId){
+            return ParameterWrapperUtils.putCode2ResponseVO(StatusCodeEnum.LOGIN_USER_NOT_LOGIN, null);
+        }else {
+            message.setUserId(Integer.parseInt(userId.toString()));
+        }
         return messageService.insertMessage(message);
     }
 

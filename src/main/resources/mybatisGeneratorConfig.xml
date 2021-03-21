@@ -83,24 +83,20 @@
                      enableXXXByExample 默认为 true， 为 true 会生成一个对应Example帮助类，帮助你进行条件查询，不想要可以设为false
                      -->
 
-        <table tableName="t_user" domainObjectName="User"/>
-        <table tableName="t_article" domainObjectName="Article"/>
-        <table tableName="t_article_category" domainObjectName="ArticleCategory"/>
-        <table tableName="t_diary" domainObjectName="Diary"/>
-        <table tableName="t_link" domainObjectName="Link"/>
+<!--        <table tableName="t_user" domainObjectName="User"/>-->
+<!--        <table tableName="t_article" domainObjectName="Article"/>-->
+<!--        <table tableName="t_article_category" domainObjectName="ArticleCategory"/>-->
+<!--        <table tableName="t_diary" domainObjectName="Diary"/>-->
+<!--        <table tableName="t_link" domainObjectName="Link"/>-->
         <table tableName="t_message" domainObjectName="Message"/>
         <table tableName="t_answer" domainObjectName="Answer"/>
-        <table tableName="t_setting" domainObjectName="Setting"/>
+<!--        <table tableName="t_setting" domainObjectName="Setting"/>-->
 
-        <table tableName="v_article" domainObjectName="ArticleView"
-               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"
-               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"
-               enableInsert="false"/>
         <table tableName="v_message" domainObjectName="MessageView"
                enableDeleteByExample="false" enableDeleteByPrimaryKey="false"
                enableUpdateByExample="false" enableUpdateByPrimaryKey="false"
                enableInsert="false"/>
-        <table tableName="v_message_answer" domainObjectName="MessageAnswerView"
+        <table tableName="v_answer" domainObjectName="AnswerView"
                enableDeleteByExample="false" enableDeleteByPrimaryKey="false"
                enableUpdateByExample="false" enableUpdateByPrimaryKey="false"
                enableInsert="false"/>

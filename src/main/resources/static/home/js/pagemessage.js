@@ -1,5 +1,5 @@
 ﻿var area;
-layui.use(['element', 'jquery', 'layedit', 'flow'], function () {
+layui.use(['element', 'jquery', 'layedit', 'flow', "form"], function () {
     var element = layui.element;
     var form = layui.form;
     var $ = layui.jquery;
@@ -38,6 +38,70 @@ layui.use(['element', 'jquery', 'layedit', 'flow'], function () {
              $(this).text('回复');
          }
      });
+
+    form.on('submit(formLeaveMessage)', function(data){
+        let postData = {
+            "content" : data.field.editorContent,
+            "type" : false
+        }
+        $.ajax({
+            method: 'post',
+            url: '/message/add',
+            data: JSON.stringify(postData),
+            contentType:'application/json',
+            dataType:'JSON',
+            success:function(res){
+                if(res.code === 200.1){
+                    layui.layer.msg("请先登录!", {icon: 5});
+                    setTimeout(function () {
+                        window.location.href = "/home/login";
+                    },2000)
+                }else {
+                    if(res.code === 0){
+                        layui.layer.msg(res.msg, {icon: 6});
+                    } else {
+                        layui.layer.msg(res.msg, {icon: 5});
+                    }
+                    setTimeout(function () {
+                        window.location.reload();
+                    },2000)
+                }
+            }
+        })
+        return false;
+    });
+    form.on('submit(formReply)', function(data){
+        let postData = {
+            "messageId" : data.field.remarkId,
+            "targetUserId":data.field.targetUserId,
+            "content" : data.field.replyContent,
+        }
+        $.ajax({
+            method: 'post',
+            url: '/answer/add',
+            data: JSON.stringify(postData),
+            contentType:'application/json',
+            dataType:'JSON',
+            success:function(res){
+                if(res.code === 200.1){
+                    layui.layer.msg("请先登录!", {icon: 5});
+                    setTimeout(function () {
+                        window.location.href = "/home/login";
+                    },2000)
+                }else {
+                    if(res.code === 0){
+                        layui.layer.msg(res.msg, {icon: 6});
+                    } else {
+                        layui.layer.msg(res.msg, {icon: 5});
+                    }
+                    setTimeout(function () {
+                        window.location.reload();
+                    },2000)
+                }
+            }
+        })
+        return false;
+    });
  
 });
  

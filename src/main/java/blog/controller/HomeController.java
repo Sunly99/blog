@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class HomeController {
     @Resource
     private ArticleCategoryService articleCategoryService;
     @Resource
-    private AnswerService answerService;
+    private MessageAnswerService messageAnswerService;
 
     @RequestMapping("/index")
     public String indexPage(Model model){
@@ -47,8 +48,7 @@ public class HomeController {
 
     @RequestMapping("/message")
     public String messagePage(Model model){
-        List<MessageAnswerVO> messageAnswerVOList = answerService.selectAnswer(false,null);
-        model.addAttribute("messages", messageAnswerVOList);
+        model.addAttribute("messages",messageAnswerService.selectMessageAnswerList());
         return "home/message";
     }
 
@@ -73,11 +73,18 @@ public class HomeController {
     @RequestMapping("/read/{id}")
     public String readPage(@PathVariable Integer id,Model model){
         model.addAttribute("article",articleService.selectArticleById(id));
+        model.addAttribute("messages",messageAnswerService.selectMessageAnswerList(id));
         return "home/read";
     }
 
     @RequestMapping("/about")
     public String aboutPage(Model model){
         return "home/about";
+    }
+
+    @RequestMapping("/login")
+    public String loginPage(HttpSession session){
+        session.invalidate();
+        return "login";
     }
 }
