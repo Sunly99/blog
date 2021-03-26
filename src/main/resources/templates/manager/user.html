@@ -243,7 +243,6 @@
                 </div>
               </div>
               <div class="card-body">
-
                 <div class="table-responsive">
                   <table class="table table-bordered">
                     <thead>
@@ -257,6 +256,7 @@
                       <th>Id</th>
                       <th>用户名</th>
                       <th>昵称</th>
+                      <th>密码</th>
                       <th>角色</th>
                       <th>状态</th>
                       <th>操作</th>
@@ -270,15 +270,21 @@
                         </label>
                       </td>
                       <td th:utext="${(users.data.pageNum-1) * users.data.pageSize + userStat.count}"></td>
-                      <td th:utext="${user.id}"></td>
-                      <td th:utext="${user.username}"></td>
-                      <td th:utext="${user.nickName}"></td>
+                      <td th:utext="${user.id}" class="userId"></td>
+                      <td th:utext="${user.username}" class="username"></td>
+                      <td th:utext="${user.password}" class="password"></td>
+                      <td th:utext="${user.nickName}" class="nickName"></td>
                       <td th:utext="${user.level}==0?'站主':'用户'"></td>
-                      <td><font class="text-success" th:class="${user.status}?'text-success':'text-danger'" th:utext="${user.status}?'正常':'禁用'"></font></td>
+                      <td>
+                        <label class="lyear-switch switch-solid switch-cyan">
+                          <input class="status" type="checkbox" th:checked="${user.status}" th:value="${user.status}" th:data-id="${user.id}">
+                          <span></span>
+                        </label>
+                      </td>
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#editModal" data-whatever="编辑" title="编辑"><i class="mdi mdi-pencil"></i></button>
-                          <button type="button" class="btn btn-xs btn-default" title="删除"><i class="mdi mdi-window-close"></i></button>
+                          <button type="button" class="btn btn-xs btn-default delButton" title="删除" th:data-id="${user.id}"><i class="mdi mdi-window-close"></i></button>
                         </div>
                       </td>
                     </tr>
@@ -319,6 +325,10 @@
       </div>
       <div class="modal-body">
         <form>
+          <div class="form-group" hidden>
+            <label for="userId" class="control-label">Id：</label>
+            <input type="text" class="form-control" id="userId">
+          </div>
           <div class="form-group">
             <label for="username" class="control-label">用户名：</label>
             <input type="text" class="form-control" id="username">
@@ -327,11 +337,15 @@
             <label for="password" class="control-label">密码：</label>
             <input type="text" class="form-control" id="password">
           </div>
+          <div class="form-group">
+            <label for="nickname" class="control-label">昵称：</label>
+            <input type="text" class="form-control" id="nickname">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">发送消息</button>
+        <button type="button" class="btn btn-primary" id="commit">提交</button>
       </div>
     </div>
   </div>
@@ -340,25 +354,122 @@
 <script type="text/javascript" src="../../static/manager/js/jquery.min.js" th:src="@{~/manager/js/jquery.min.js}"></script>
 <script type="text/javascript" src="../../static/manager/js/bootstrap.min.js" th:src="@{~/manager/js/bootstrap.min.js}"></script>
 <script type="text/javascript" src="../../static/manager/js/perfect-scrollbar.min.js" th:src="@{~/manager/js/perfect-scrollbar.min.js}"></script>
+<script type="text/javascript" src="../../static/manager/js/bootstrap-notify.min.js" th:src="@{~/manager/js/bootstrap-notify.min.js}"></script>
+<script type="text/javascript" src="../../static/manager/js/lightyear.js" th:src="@{~/manager/js/lightyear.js}"></script>
 <script type="text/javascript" src="../../static/manager/js/main.min.js" th:src="@{~/manager/js/main.min.js}"></script>
 <script type="text/javascript" th:inline="javascript">
   /*<![CDATA[*/
 
   $(function(){
     $('.search-bar .dropdown-menu a').click(function() {
-      var field = $(this).data('field') || '';
+      let field = $(this).data('field') || '';
       $('#search-field').val(field);
       $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
     });
   });
+
   $('#editModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var recipient = button.data('whatever')
-    var modal = $(this)
+    let button = $(event.relatedTarget);
+    let recipient = button.data('whatever');
+    let modal = $(this);
     modal.find('.modal-title').text(recipient)
     if (recipient === '新增'){
-      modal.find('.modal-body input').val('')
+      modal.find('.modal-body input').val('');
+    }else {
+      let dataObj = button.parent().parent().parent();
+      modal.find('#userId').val(dataObj.find('.userId').text());
+      modal.find('#username').val(dataObj.find('.username').text());
+      modal.find('#password').val(dataObj.find('.password').text());
+      modal.find('#nickname').val(dataObj.find('.nickName').text());
     }
+    $('#commit').unbind('click').click(function (){
+      lightyear.loading('show');
+      let url;
+      let data;
+      if (recipient === '新增'){
+        url = '/user/add'
+        data = {
+          'username':modal.find('#username').val(),
+          'password':modal.find('#password').val(),
+          'nickName':modal.find('#nickname').val()
+        }
+      }else if(recipient === '编辑'){
+        url = '/user/modify'
+        data = {
+          'id':modal.find('#userId').val(),
+          'username':modal.find('#username').val(),
+          'password':modal.find('#password').val(),
+          'nickName':modal.find('#nickname').val()
+        }
+      }
+      $.ajax({
+        url: url,
+        type: 'post',
+        dataType:'JSON',
+        data: JSON.stringify(data),
+        contentType: "application/json;charset=UTF-8",
+        success:function(res){
+          if (res.code === 0){
+            lightyear.notify(recipient + '成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+            window.location.reload();
+          }else {
+            lightyear.notify(recipient + '失败!\n'+ res, 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+          }
+          lightyear.loading('hide');
+        }
+      })
+    })
+  })
+
+  $('.delButton').unbind('click').on('click',function (){
+    lightyear.loading('show');
+    let id = $(this).data('id');
+    $.ajax({
+      url: '/user/del?id='+id,
+      type: 'post',
+      dataType:'JSON',
+      data: JSON.stringify({}),
+      contentType: "application/json;charset=UTF-8",
+      success:function(res){
+        if (res.code === 0){
+          lightyear.notify('删除成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+          window.location.reload();
+        }else {
+          lightyear.notify('删除失败!\n'+ res, 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+        }
+        lightyear.loading('hide');
+      }
+    })
+  })
+
+  $('.status').on('click', function(){
+    lightyear.loading('show');
+    if($(this).val()==='true'){
+      $(this).val('false');
+    }else {
+      $(this).val('true');
+    }
+    let id = $(this).data('id');
+    let status = $(this).val();
+    $.ajax({
+      url: '/user/modify',
+      type: 'post',
+      dataType:'JSON',
+      data: JSON.stringify({
+        'id':id,
+        'status': status
+      }),
+      contentType: "application/json;charset=UTF-8",
+      success:function(res){
+        if (res.code === 0){
+          lightyear.notify('编辑成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+          window.location.reload();
+        }else {
+          lightyear.notify('编辑失败!\n'+ res, 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+        }
+        lightyear.loading('hide');
+      }
+    })
   })
   /*]]>*/
 </script>

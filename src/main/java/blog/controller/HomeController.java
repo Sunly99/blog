@@ -1,6 +1,5 @@
 package blog.controller;
 
-import blog.pojo.vo.home.answer.MessageAnswerVO;
 import blog.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * @author sly

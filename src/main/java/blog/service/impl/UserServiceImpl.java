@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService {
         int count;
         try{
             Date date = new Date();
+            user.setLevel(1);
+            user.setStatus(true);
             user.setCreateTime(date);
             user.setUpdateTime(date);
             count = userMapper.insertSelective(user);
