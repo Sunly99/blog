@@ -42,5 +42,5 @@ public interface UserService {
      * @param pageSize 分页大小
      * @return ResponseVO<PageInfo<User>> 自定义标准返回类
      */
-    ResponseVO<PageInfo<User>> selectUser(Integer pageNum, Integer pageSize);
+    PageInfo<User> selectUser(Integer pageNum, Integer pageSize);
 }

@@ -4,9 +4,7 @@ import blog.pojo.po.User;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.LoginService;
 import io.swagger.annotations.Api;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 

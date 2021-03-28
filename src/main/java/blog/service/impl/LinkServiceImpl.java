@@ -34,6 +34,7 @@ public class LinkServiceImpl implements LinkService {
             Date date = new Date();
             link.setCreateTime(date);
             link.setUpdateTime(date);
+            link.setStatus(true);
             count = linkMapper.insertSelective(link);
         }catch (Exception e){
             log.error("LinkServiceImpl:insertLink \n" + e.getMessage());

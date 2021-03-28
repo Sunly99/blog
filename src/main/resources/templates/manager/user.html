@@ -18,35 +18,28 @@
   <div class="lyear-layout-container">
     <!--左侧导航-->
     <aside class="lyear-layout-sidebar">
-       
       <!-- logo -->
       <div id="logo" class="sidebar-header">
         <a href="index.html" th:href="@{/home/index}"><img src="../../static/manager/images/logo-sidebar.png" th:src="@{~/manager/images/logo-sidebar.png}" title="Sunly's Garden" alt="Sunly's Garden" /></a>
       </div>
       <div class="lyear-layout-sidebar-scroll">
-        
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item"> <a href="#"><i class="mdi mdi-home"></i> 后台首页</a> </li>
-            <li class="nav-item"> <a href="#"><i class="mdi mdi-human-greeting"></i> 用户管理</a> </li>
+            <li class="nav-item"> <a href="#" th:href="@{/manager/index}"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li class="nav-item active"> <a href="#" th:href="@{/manager/user}"><i class="mdi mdi-human-greeting"></i> 用户管理</a> </li>
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-blogger"></i> 博文管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="#">博文类型</a> </li>
-                <li> <a href="#">博文列表</a> </li>
+                <li> <a href="#" th:href="@{/manager/article-category}">博文类型</a> </li>
+                <li> <a href="#" th:href="@{/manager/article}">博文列表</a> </li>
               </ul>
             </li>
-            <li class="nav-item"> <a href="#"><i class="mdi mdi-link-variant"></i> 友链管理</a> </li>
-            <li class="nav-item"> <a href="#"><i class="mdi mdi-message-processing"></i> 留言管理</a> </li>
-            <li class="nav-item"> <a href="#"><i class="mdi mdi-file-document"></i> 日记管理</a> </li>
+            <li class="nav-item"> <a href="#" th:href="@{/manager/link}"><i class="mdi mdi-link-variant"></i> 友链管理</a> </li>
+            <li class="nav-item"> <a href="#" th:href="@{/manager/message}"><i class="mdi mdi-message-processing"></i> 留言管理</a> </li>
+            <li class="nav-item"> <a href="#" th:href="@{/manager/diary}"><i class="mdi mdi-file-document"></i> 日记管理</a> </li>
           </ul>
         </nav>
-        
-        <div class="sidebar-footer">
-          <p class="copyright">Copyright &copy; 2019. <a target="_blank" href="#">IT书包</a> All rights reserved.</p>
-        </div>
       </div>
-      
     </aside>
     <!--End 左侧导航-->
     
@@ -223,21 +216,6 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-toolbar clearfix">
-                <form class="pull-right search-bar" method="get" action="#!" role="form">
-                  <div class="input-group">
-                    <div class="input-group-btn">
-                      <input type="hidden" name="search_field" id="search-field" value="title">
-                      <button class="btn btn-default dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
-                        标题 <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="title">标题</a> </li>
-                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name">栏目</a> </li>
-                      </ul>
-                    </div>
-                    <input type="text" class="form-control" value="" name="keyword" placeholder="请输入名称">
-                  </div>
-                </form>
                 <div class="toolbar-btn-action">
                   <button type="button" class="btn btn-primary m-r-5" data-toggle="modal" data-target="#editModal" data-whatever="新增"><i class="mdi mdi-plus"></i>新增</button>
                 </div>
@@ -247,29 +225,17 @@
                   <table class="table table-bordered">
                     <thead>
                     <tr>
-                      <th>
-                        <label class="lyear-checkbox checkbox-primary">
-                          <input type="checkbox" id="check-all"><span></span>
-                        </label>
-                      </th>
-                      <th>序号</th>
                       <th>Id</th>
                       <th>用户名</th>
-                      <th>昵称</th>
                       <th>密码</th>
+                      <th>昵称</th>
                       <th>角色</th>
                       <th>状态</th>
                       <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user:${users.data.list}">
-                      <td>
-                        <label class="lyear-checkbox checkbox-primary">
-                          <input type="checkbox" name="ids[]" value="1" th:value="${userStat.count}"><span></span>
-                        </label>
-                      </td>
-                      <td th:utext="${(users.data.pageNum-1) * users.data.pageSize + userStat.count}"></td>
+                    <tr th:each="user:${users.list}">
                       <td th:utext="${user.id}" class="userId"></td>
                       <td th:utext="${user.username}" class="username"></td>
                       <td th:utext="${user.password}" class="password"></td>
@@ -292,14 +258,14 @@
                   </table>
                 </div>
                 <ul class="pagination" >
-                  <li class="disabled" th:class="${users.data.isFirstPage}?'disabled':''">
-                    <a href="#!" th:href="${users.data.isFirstPage}?@{'#!'}:@{'/manager/user?pageNum='+${users.data.prePage}}">«</a>
+                  <li class="disabled" th:class="${users.isFirstPage}?'disabled':''">
+                    <a href="#!" th:href="${users.isFirstPage}?@{'#!'}:@{'/manager/user?pageNum='+${users.prePage}}">«</a>
                   </li>
-                  <li th:each="page:${users.data.navigatepageNums}" th:class="${page}==${users.data.pageNum}?'active':''">
+                  <li th:each="page:${users.navigatepageNums}" th:class="${page}==${users.pageNum}?'active':''">
                     <a href="#!" th:href="@{'/manager/user?pageNum='+${page}}" th:utext="${page}">2</a>
                   </li>
-                  <li class="disabled" th:class="${users.data.isLastPage}?'disabled':''">
-                    <a href="#!" th:href="${users.data.isLastPage}?@{'#!'}:@{'/manager/user?pageNum='+${users.data.nextPage}}">»</a>
+                  <li class="disabled" th:class="${users.isLastPage}?'disabled':''">
+                    <a href="#!" th:href="${users.isLastPage}?@{'#!'}:@{'/manager/user?pageNum='+${users.nextPage}}">»</a>
                   </li>
                 </ul>
               </div>
@@ -359,118 +325,109 @@
 <script type="text/javascript" src="../../static/manager/js/main.min.js" th:src="@{~/manager/js/main.min.js}"></script>
 <script type="text/javascript" th:inline="javascript">
   /*<![CDATA[*/
-
   $(function(){
-    $('.search-bar .dropdown-menu a').click(function() {
-      let field = $(this).data('field') || '';
-      $('#search-field').val(field);
-      $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
-    });
-  });
-
-  $('#editModal').on('show.bs.modal', function (event) {
-    let button = $(event.relatedTarget);
-    let recipient = button.data('whatever');
-    let modal = $(this);
-    modal.find('.modal-title').text(recipient)
-    if (recipient === '新增'){
-      modal.find('.modal-body input').val('');
-    }else {
-      let dataObj = button.parent().parent().parent();
-      modal.find('#userId').val(dataObj.find('.userId').text());
-      modal.find('#username').val(dataObj.find('.username').text());
-      modal.find('#password').val(dataObj.find('.password').text());
-      modal.find('#nickname').val(dataObj.find('.nickName').text());
-    }
-    $('#commit').unbind('click').click(function (){
-      lightyear.loading('show');
-      let url;
-      let data;
+    $('#editModal').on('show.bs.modal', function (event) {
+      let button = $(event.relatedTarget);
+      let recipient = button.data('whatever');
+      let modal = $(this);
+      modal.find('.modal-title').text(recipient)
       if (recipient === '新增'){
-        url = '/user/add'
-        data = {
-          'username':modal.find('#username').val(),
-          'password':modal.find('#password').val(),
-          'nickName':modal.find('#nickname').val()
-        }
-      }else if(recipient === '编辑'){
-        url = '/user/modify'
-        data = {
-          'id':modal.find('#userId').val(),
-          'username':modal.find('#username').val(),
-          'password':modal.find('#password').val(),
-          'nickName':modal.find('#nickname').val()
-        }
+        modal.find('.modal-body input').val('');
+      }else {
+        let dataObj = button.parent().parent().parent();
+        modal.find('#userId').val(dataObj.find('.userId').text());
+        modal.find('#username').val(dataObj.find('.username').text());
+        modal.find('#password').val(dataObj.find('.password').text());
+        modal.find('#nickname').val(dataObj.find('.nickName').text());
       }
+      $('#commit').unbind('click').click(function (){
+        lightyear.loading('show');
+        let url;
+        let data;
+        if (recipient === '新增'){
+          url = '/user/add'
+          data = {
+            'username':modal.find('#username').val(),
+            'password':modal.find('#password').val(),
+            'nickName':modal.find('#nickname').val()
+          }
+        }else if(recipient === '编辑'){
+          url = '/user/modify'
+          data = {
+            'id':modal.find('#userId').val(),
+            'username':modal.find('#username').val(),
+            'password':modal.find('#password').val(),
+            'nickName':modal.find('#nickname').val()
+          }
+        }
+        $.ajax({
+          url: url,
+          type: 'post',
+          dataType:'JSON',
+          data: JSON.stringify(data),
+          contentType: "application/json;charset=UTF-8",
+          success:function(res){
+            if (res.code === 0){
+              window.location.reload();
+            }else {
+              lightyear.notify(recipient + '失败!', 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+            }
+            lightyear.loading('hide');
+          }
+        })
+      })
+    })
+
+    $('.delButton').unbind('click').on('click',function (){
+      lightyear.loading('show');
+      let id = $(this).data('id');
       $.ajax({
-        url: url,
+        url: '/user/del?id='+id,
         type: 'post',
         dataType:'JSON',
-        data: JSON.stringify(data),
+        data: JSON.stringify({}),
         contentType: "application/json;charset=UTF-8",
         success:function(res){
           if (res.code === 0){
-            lightyear.notify(recipient + '成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
             window.location.reload();
           }else {
-            lightyear.notify(recipient + '失败!\n'+ res, 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+            lightyear.notify('删除失败!', 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
           }
           lightyear.loading('hide');
         }
       })
     })
-  })
 
-  $('.delButton').unbind('click').on('click',function (){
-    lightyear.loading('show');
-    let id = $(this).data('id');
-    $.ajax({
-      url: '/user/del?id='+id,
-      type: 'post',
-      dataType:'JSON',
-      data: JSON.stringify({}),
-      contentType: "application/json;charset=UTF-8",
-      success:function(res){
-        if (res.code === 0){
-          lightyear.notify('删除成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
-          window.location.reload();
-        }else {
-          lightyear.notify('删除失败!\n'+ res, 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
-        }
-        lightyear.loading('hide');
+    $('.status').unbind('click').on('click', function(){
+      lightyear.loading('show');
+      if($(this).val()==='true'){
+        $(this).val('false');
+      }else {
+        $(this).val('true');
       }
-    })
-  })
-
-  $('.status').on('click', function(){
-    lightyear.loading('show');
-    if($(this).val()==='true'){
-      $(this).val('false');
-    }else {
-      $(this).val('true');
-    }
-    let id = $(this).data('id');
-    let status = $(this).val();
-    $.ajax({
-      url: '/user/modify',
-      type: 'post',
-      dataType:'JSON',
-      data: JSON.stringify({
-        'id':id,
-        'status': status
-      }),
-      contentType: "application/json;charset=UTF-8",
-      success:function(res){
-        if (res.code === 0){
-          lightyear.notify('编辑成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
-          window.location.reload();
-        }else {
-          lightyear.notify('编辑失败!\n'+ res, 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+      let id = $(this).data('id');
+      let status = $(this).val();
+      $.ajax({
+        url: '/user/modify',
+        type: 'post',
+        dataType:'JSON',
+        data: JSON.stringify({
+          'id':id,
+          'status': status
+        }),
+        contentType: "application/json;charset=UTF-8",
+        success:function(res){
+          if (res.code === 0 && res.data > 0){
+            lightyear.notify('编辑成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+          }else {
+            lightyear.notify('编辑失败!', 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+            window.location.reload();
+          }
+          lightyear.loading('hide');
         }
-        lightyear.loading('hide');
-      }
+      })
     })
-  })
+  });
   /*]]>*/
 </script>
 </body>

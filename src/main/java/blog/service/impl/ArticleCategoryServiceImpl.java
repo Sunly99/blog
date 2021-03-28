@@ -30,6 +30,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     public ResponseVO<?> insertArticleCategory(ArticleCategory articleCategory) {
         int count;
         try{
+            articleCategory.setStatus(true);
             count = articleCategoryMapper.insertSelective(articleCategory);
         }catch (Exception e){
             log.error("ArticleCategoryServiceImpl:insertArticleCategory \n" + e.getMessage());

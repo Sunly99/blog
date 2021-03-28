@@ -69,10 +69,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseVO<PageInfo<User>> selectUser(Integer pageNum, Integer pageSize) {
+    public PageInfo<User> selectUser(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<User> list = userMapper.selectByExample(new UserExample());
-        PageInfo<User> pageInfo = new PageInfo<>(list);
-        return ParameterWrapperUtils.successAndRenderData(pageInfo);
+        return new PageInfo<>(list);
     }
 }

@@ -1,8 +1,10 @@
 package blog.controller;
 
+import blog.pojo.po.Link;
 import blog.pojo.po.User;
 import blog.pojo.vo.common.ResponseVO;
 import blog.service.UserService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("/query")
-    public ResponseVO<?> selectUser(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+    public PageInfo<User> selectUser(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize){
         return userService.selectUser(pageNum, pageSize);
     }
