@@ -55,7 +55,6 @@ public interface ArticleService {
      */
     ArticleView selectArticleById(Integer id);
 
-
     /**
      * 查询热门文章列表
      *

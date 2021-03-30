@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml"  lang="zh">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>博客管理 - Sunly's Garden</title>
-<link rel="icon" href="../../static/manager/favicon.ico" th:href="@{~/manager/favicon.ico}" type="image/ico">
-<meta name="keywords" content="Sunly's,Sunly's Garden">
-<meta name="description" content="Sunly的个人博客">
-<meta name="author" content="Sunly">
-<link href="../../static/manager/css/bootstrap.min.css" th:href="@{~/manager/css/bootstrap.min.css}" rel="stylesheet">
-<link href="../../static/manager/css/materialdesignicons.min.css" th:href="@{~/manager/css/materialdesignicons.min.css}" rel="stylesheet">
-<link href="../../static/manager/css/style.min.css" th:href="@{~/manager/css/style.min.css}" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>博客管理 - Sunly's Garden</title>
+  <link rel="icon" href="../../static/manager/favicon.ico" th:href="@{~/manager/favicon.ico}" type="image/ico">
+  <meta name="keywords" content="Sunly's,Sunly's Garden">
+  <meta name="description" content="Sunly的个人博客">
+  <meta name="author" content="Sunly">
+  <link href="../../static/manager/css/bootstrap.min.css" th:href="@{~/manager/css/bootstrap.min.css}" rel="stylesheet">
+  <link href="../../static/manager/css/materialdesignicons.min.css" th:href="@{~/manager/css/materialdesignicons.min.css}" rel="stylesheet">
+  <link href="../../static/manager/css/style.min.css" th:href="@{~/manager/css/style.min.css}" rel="stylesheet">
+  <style>
+    td{
+      vertical-align: middle !important;
+      text-align: center;
+    }
+  </style>
 </head>
   
 <body>
@@ -242,39 +248,46 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="diary:${diaries.list}">
-                      <td th:utext="${diary.id}" class="diary_id"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td>
+                    <tr th:each="article:${articles.list}">
+                      <td th:utext="${article.id}" class="article_id"></td>
+                      <td th:utext="${article.categoryName}" class="article_category_name"></td>
+                      <td th:utext="${article.title}" class="article_title"></td>
+                      <td class="article_avatar">
+                        <img th:src="${article.avatar}" alt="avatar" style="width: 300px"/>
+                      </td>
+                      <td th:utext="${article.about}" class="article_about" style="max-width: 300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" th:title="${article.about}">
+                      </td>
+                      <td >
+                        <button id="mainArticle"  type="button" class="btn btn-xs btn-primary article-main" data-toggle="modal" data-target="#mainModal" th:data-whatever="${article.id}">
+                          点击查看
+                        </button>
+                      </td>
+                      <td th:utext="${article.tag}" class="article_tag"></td>
+                      <td th:utext="${article.articleOrder}" class="article_article_order"></td>
+                      <td >
                         <label class="lyear-switch switch-solid switch-cyan">
-                          <input class="status" type="checkbox" th:checked="${diary.status}" th:value="${diary.status}" th:data-id="${diary.id}">
+                          <input class="status" data-type="top" type="checkbox" th:checked="${article.statusTop}" th:value="${article.statusTop}" th:data-id="${article.id}">
                           <span></span>
                         </label>
                       </td>
                       <td>
                         <label class="lyear-switch switch-solid switch-cyan">
-                          <input class="status" type="checkbox" th:checked="${diary.status}" th:value="${diary.status}" th:data-id="${diary.id}">
+                          <input class="status" data-type="hot" type="checkbox" th:checked="${article.statusHot}" th:value="${article.statusHot}" th:data-id="${article.id}">
                           <span></span>
                         </label>
                       </td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
-                      <td th:utext="${diary.content}" class="diary_content"></td>
+                      <td th:utext="${article.nickName}" class="article_nick_name"></td>
+                      <td th:utext="${article.counts}" class="article_counts"></td>
                       <td>
                         <label class="lyear-switch switch-solid switch-cyan">
-                          <input class="status" type="checkbox" th:checked="${diary.status}" th:value="${diary.status}" th:data-id="${diary.id}">
+                          <input class="status" data-type="show" type="checkbox" th:checked="${article.statusShow}" th:value="${article.statusShow}" th:data-id="${article.id}">
                           <span></span>
                         </label>
                       </td>
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#editModal" data-whatever="编辑" title="编辑"><i class="mdi mdi-pencil"></i></button>
-                          <button type="button" class="btn btn-xs btn-default delButton" title="删除" th:data-id="${diary.id}"><i class="mdi mdi-window-close"></i></button>
+                          <button type="button" class="btn btn-xs btn-default delButton" title="删除" th:data-id="${article.id}"><i class="mdi mdi-window-close"></i></button>
                         </div>
                       </td>
                     </tr>
@@ -282,14 +295,14 @@
                   </table>
                 </div>
                 <ul class="pagination" >
-                  <li class="disabled" th:class="${diaries.isFirstPage}?'disabled':''">
-                    <a href="#!" th:href="${diaries.isFirstPage}?@{'#!'}:@{'/manager/diary?pageNum='+${diaries.prePage}}">«</a>
+                  <li class="disabled" th:class="${articles.isFirstPage}?'disabled':''">
+                    <a href="#!" th:href="${articles.isFirstPage}?@{'#!'}:@{'/manager/article?pageNum='+${articles.prePage}}">«</a>
                   </li>
-                  <li th:each="page:${diaries.navigatepageNums}" th:class="${page}==${diaries.pageNum}?'active':''">
-                    <a href="#!" th:href="@{'/manager/diary?pageNum='+${page}}" th:utext="${page}">2</a>
+                  <li th:each="page:${articles.navigatepageNums}" th:class="${page}==${articles.pageNum}?'active':''">
+                    <a href="#!" th:href="@{'/manager/article?pageNum='+${page}}" th:utext="${page}">2</a>
                   </li>
-                  <li class="disabled" th:class="${diaries.isLastPage}?'disabled':''">
-                    <a href="#!" th:href="${diaries.isLastPage}?@{'#!'}:@{'/manager/diary?pageNum='+${diaries.nextPage}}">»</a>
+                  <li class="disabled" th:class="${articles.isLastPage}?'disabled':''">
+                    <a href="#!" th:href="${articles.isLastPage}?@{'#!'}:@{'/manager/article?pageNum='+${articles.nextPage}}">»</a>
                   </li>
                 </ul>
               </div>
@@ -305,29 +318,19 @@
   </div>
 </div>
 
-<!--模态框-->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+<!-- 详情 模态框-->
+<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="editModalLabel">新消息</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">内容</h4>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group" hidden>
-            <label for="diary_id" class="control-label">Id：</label>
-            <input type="text" class="form-control" id="diary_id">
-          </div>
-          <div class="form-group">
-            <label for="diary_content" class="control-label">日记：</label>
-            <input type="text" class="form-control" id="diary_content">
-          </div>
-        </form>
+        您的内容...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="commit">提交</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
       </div>
     </div>
   </div>
@@ -342,49 +345,16 @@
 <script type="text/javascript" th:inline="javascript">
   /*<![CDATA[*/
   $(function(){
-    $('#editModal').on('show.bs.modal', function (event) {
+    $('#mainModal').on('show.bs.modal', function (event) {
       let button = $(event.relatedTarget);
       let recipient = button.data('whatever');
       let modal = $(this);
-      modal.find('.modal-title').text(recipient)
-      if (recipient === '新增'){
-        modal.find('.modal-body input').val('');
-      }else {
-        let dataObj = button.parent().parent().parent();
-        modal.find('#diary_id').val(dataObj.find('.diary_id').text());
-        modal.find('#diary_content').val(dataObj.find('.diary_content').text());
-      }
-      $('#commit').unbind('click').click(function (){
-        lightyear.loading('show');
-        let url;
-        let data;
-        if (recipient === '新增'){
-          url = '/diary/add'
-          data = {
-            'content':modal.find('#diary_content').val(),
-          }
-        }else if(recipient === '编辑'){
-          url = '/diary/modify'
-          data = {
-            'id':modal.find('#diary_id').val(),
-            'content':modal.find('#diary_content').val()
-          }
+      $.ajax({
+        url: '/article/query/'+ recipient,
+        type: 'get',
+        success:function(res){
+          modal.find('.modal-body').text(res.content)
         }
-        $.ajax({
-          url: url,
-          type: 'post',
-          dataType:'JSON',
-          data: JSON.stringify(data),
-          contentType: "application/json;charset=UTF-8",
-          success:function(res){
-            if (res.code === 0){
-              window.location.reload();
-            }else {
-              lightyear.notify(recipient + '失败!', 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
-            }
-            lightyear.loading('hide');
-          }
-        })
       })
     })
 
@@ -392,7 +362,7 @@
       lightyear.loading('show');
       let id = $(this).data('id');
       $.ajax({
-        url: '/diary/del?id='+id,
+        url: '/article/del?id='+id,
         type: 'post',
         dataType:'JSON',
         data: JSON.stringify({}),
@@ -416,22 +386,37 @@
         $(this).val('true');
       }
       let id = $(this).data('id');
+      let type = $(this).data('type');
       let status = $(this).val();
+      let data;
+      if(type === 'top'){
+        data={
+          'id': id,
+          'statusTop': status
+        }
+      }else if(type === 'hot'){
+        data={
+          'id': id,
+          'statusHot': status
+        }
+      }else if(type === 'show'){
+        data={
+          'id': id,
+          'statusShow': status
+        }
+      }
       $.ajax({
-        url: '/diary/modify',
+        url: '/article/modify',
         type: 'post',
         dataType:'JSON',
-        data: JSON.stringify({
-          'id':id,
-          'status': status
-        }),
+        data: JSON.stringify(data),
         contentType: "application/json;charset=UTF-8",
         success:function(res){
           if (res.code === 0 && res.data > 0){
             lightyear.notify('编辑成功!', 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
           }else {
             lightyear.notify('编辑失败!', 'danger', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
-            window.location.reload();
+            // window.location.reload();
           }
           lightyear.loading('hide');
         }

@@ -37,6 +37,7 @@ public class DiaryServiceImpl implements DiaryService {
             Date date = new Date();
             diary.setCreateTime(date);
             diary.setUpdateTime(date);
+            diary.setStatus(true);
             count = diaryMapper.insertSelective(diary);
         }catch (Exception e){
             log.error("DiaryServiceImpl:insertDiary \n" + e.getMessage());

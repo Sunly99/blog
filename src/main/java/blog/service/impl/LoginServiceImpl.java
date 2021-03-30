@@ -25,7 +25,9 @@ public class LoginServiceImpl implements LoginService {
         List<User> list = userMapper.selectByExample(userExample);
         ResponseVO<User> userResponseVO = new ResponseVO<>();
         if (list.size()>0){
-            if(password.equals(list.get(0).getPassword())){
+            if(!list.get(0).getStatus()){
+                return ParameterWrapperUtils.putCode2ResponseVO(userResponseVO, StatusCodeEnum.LOGIN_CANNOT_LOGIN,null);
+            }else if(password.equals(list.get(0).getPassword())){
                 User user = new User();
                 user.setId(list.get(0).getId());
                 user.setUsername(list.get(0).getUsername());

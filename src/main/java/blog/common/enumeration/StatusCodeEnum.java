@@ -32,8 +32,9 @@ public enum StatusCodeEnum {
     // 登录-用户不存在
     LOGIN_USER_NOT_EXIST(200.2,"用户不存在"),
     // 登录-用户名或密码错误
-    LOGIN_PASSWORD_ERROR(200.3,"用户名或密码错误");
-
+    LOGIN_PASSWORD_ERROR(200.3,"用户名或密码错误"),
+    // 登录-用户被冻结
+    LOGIN_CANNOT_LOGIN(200.4,"用户被冻结");
 
     private final double code;
     private final String msg;

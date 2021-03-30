@@ -32,6 +32,9 @@ public class ManagerController {
     @Resource
     private MessageService messageService;
 
+    @Resource
+    private ArticleService articleService;
+
     @GetMapping("/index")
     public String indexPage(){
         return "manager/index";
@@ -80,5 +83,14 @@ public class ManagerController {
     ){
         model.addAttribute("messages",messageService.selectMessage(pageNum, pageSize));
         return "manager/message";
+    }
+
+    @GetMapping("/article")
+    public String articlePage(Model model,
+                              @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                              @RequestParam(value = "pageSize", defaultValue = "10")  Integer pageSize
+    ){
+        model.addAttribute("articles",articleService.selectArticle(pageNum, pageSize, "id"));
+        return "manager/blog";
     }
 }

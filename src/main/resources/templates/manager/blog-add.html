@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"  lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>添加文章 - Sunly's Garden</title>
+    <link rel="icon" href="../../static/manager/favicon.ico" th:href="@{~/manager/favicon.ico}" type="image/ico">
+    <meta name="keywords" content="Sunly's,Sunly's Garden">
+    <meta name="description" content="Sunly的个人博客">
+    <meta name="author" content="Sunly">
+    <link href="../../static/manager/css/bootstrap.min.css" th:href="@{~/manager/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../../static/manager/css/materialdesignicons.min.css" th:href="@{~/manager/css/materialdesignicons.min.css}" rel="stylesheet">
+    <link href="../../static/manager/css/style.min.css" th:href="@{~/manager/css/style.min.css}" rel="stylesheet">
+    <link href="../../static/common/summernote/summernote.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <!--左侧导航-->
+        <aside class="lyear-layout-sidebar">
+            <!-- logo -->
+            <div id="logo" class="sidebar-header">
+                <a href="index.html" th:href="@{/home/index}"><img src="../../static/manager/images/logo-sidebar.png" th:src="@{~/manager/images/logo-sidebar.png}" title="Sunly's Garden" alt="Sunly's Garden" /></a>
+            </div>
+            <div class="lyear-layout-sidebar-scroll">
+                <nav class="sidebar-main">
+                    <ul class="nav nav-drawer">
+                        <li class="nav-item"> <a href="#" th:href="@{/manager/index}"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+                        <li class="nav-item"> <a href="#" th:href="@{/manager/user}"><i class="mdi mdi-human-greeting"></i> 用户管理</a> </li>
+                        <li class="nav-item nav-item-has-subnav active open">
+                            <a href="javascript:void(0)"><i class="mdi mdi-blogger"></i> 博文管理</a>
+                            <ul class="nav nav-subnav">
+                                <li> <a href="#" th:href="@{/manager/article-category}">博文类型</a> </li>
+                                <li class="active"> <a href="#" th:href="@{/manager/article}">博文列表</a> </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"> <a href="#" th:href="@{/manager/link}"><i class="mdi mdi-link-variant"></i> 友链管理</a> </li>
+                        <li class="nav-item"> <a href="#" th:href="@{/manager/message}"><i class="mdi mdi-message-processing"></i> 留言管理</a> </li>
+                        <li class="nav-item"> <a href="#" th:href="@{/manager/diary}"><i class="mdi mdi-file-document"></i> 日记管理</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!--End 左侧导航-->
+
+        <!--头部信息-->
+        <header class="lyear-layout-header">
+
+            <nav class="navbar navbar-default">
+                <div class="topbar">
+
+                    <div class="topbar-left">
+                        <div class="lyear-aside-toggler">
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                        </div>
+                        <span class="navbar-page-title"> 博客管理 </span>
+                    </div>
+
+                    <ul class="topbar-right">
+                        <li class="dropdown dropdown-profile">
+                            <a href="javascript:void(0)" data-toggle="dropdown">
+                                <img class="img-avatar img-avatar-48 m-r-10" src="../../static/manager/images/users/avatar.jpg" th:src="@{~/manager/images/users/avatar.jpg}" alt="Sunly" />
+                                <span>Sunly <span class="caret"></span></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li> <a href="#"><i class="mdi mdi-account"></i> 个人信息</a> </li>
+                                <li> <a href="#"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
+                                <li> <a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
+                                <li class="divider"></li>
+                                <li> <a href="#"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+                            </ul>
+                        </li>
+                        <!--切换主题配色-->
+                        <li class="dropdown dropdown-skin">
+                            <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
+                            <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
+                                <li class="drop-title"><p>主题</p></li>
+                                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="site_theme" value="default" id="site_theme_1" checked>
+                    <label for="site_theme_1"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="site_theme" value="dark" id="site_theme_2">
+                    <label for="site_theme_2"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="site_theme" value="translucent" id="site_theme_3">
+                    <label for="site_theme_3"></label>
+                  </span>
+                                </li>
+                                <li class="drop-title"><p>LOGO</p></li>
+                                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="logo_bg" value="default" id="logo_bg_1" checked>
+                    <label for="logo_bg_1"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="logo_bg" value="color_2" id="logo_bg_2">
+                    <label for="logo_bg_2"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="logo_bg" value="color_3" id="logo_bg_3">
+                    <label for="logo_bg_3"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="logo_bg" value="color_4" id="logo_bg_4">
+                    <label for="logo_bg_4"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="logo_bg" value="color_5" id="logo_bg_5">
+                    <label for="logo_bg_5"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="logo_bg" value="color_6" id="logo_bg_6">
+                    <label for="logo_bg_6"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="logo_bg" value="color_7" id="logo_bg_7">
+                    <label for="logo_bg_7"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="logo_bg" value="color_8" id="logo_bg_8">
+                    <label for="logo_bg_8"></label>
+                  </span>
+                                </li>
+                                <li class="drop-title"><p>头部</p></li>
+                                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="header_bg" value="default" id="header_bg_1" checked>
+                    <label for="header_bg_1"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="header_bg" value="color_2" id="header_bg_2">
+                    <label for="header_bg_2"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="header_bg" value="color_3" id="header_bg_3">
+                    <label for="header_bg_3"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="header_bg" value="color_4" id="header_bg_4">
+                    <label for="header_bg_4"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="header_bg" value="color_5" id="header_bg_5">
+                    <label for="header_bg_5"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="header_bg" value="color_6" id="header_bg_6">
+                    <label for="header_bg_6"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="header_bg" value="color_7" id="header_bg_7">
+                    <label for="header_bg_7"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="header_bg" value="color_8" id="header_bg_8">
+                    <label for="header_bg_8"></label>
+                  </span>
+                                </li>
+                                <li class="drop-title"><p>侧边栏</p></li>
+                                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="sidebar_bg" value="default" id="sidebar_bg_1" checked>
+                    <label for="sidebar_bg_1"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="sidebar_bg" value="color_2" id="sidebar_bg_2">
+                    <label for="sidebar_bg_2"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="sidebar_bg" value="color_3" id="sidebar_bg_3">
+                    <label for="sidebar_bg_3"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="sidebar_bg" value="color_4" id="sidebar_bg_4">
+                    <label for="sidebar_bg_4"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="sidebar_bg" value="color_5" id="sidebar_bg_5">
+                    <label for="sidebar_bg_5"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="sidebar_bg" value="color_6" id="sidebar_bg_6">
+                    <label for="sidebar_bg_6"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="sidebar_bg" value="color_7" id="sidebar_bg_7">
+                    <label for="sidebar_bg_7"></label>
+                  </span>
+                                    <span>
+                    <input type="radio" name="sidebar_bg" value="color_8" id="sidebar_bg_8">
+                    <label for="sidebar_bg_8"></label>
+                  </span>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--切换主题配色-->
+                    </ul>
+
+                </div>
+            </nav>
+
+        </header>
+        <!--End 头部信息-->
+
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="card">
+                            <div class="card-header"><h4>新增文章</h4></div>
+                            <div class="card-body">
+                                <form action="#!" method="post" class="row">
+                                    <div class="form-group col-md-12" hidden>
+                                        <label for="article_id" class="control-label">Id：</label>
+                                        <input type="text" class="form-control" id="article_id">
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <div  class="form-group">
+                                            <label for="article_title" class="control-label">标题：</label>
+                                            <input type="text" name="article_title" class="form-control" id="article_title">
+                                        </div>
+                                        <div  class="form-group">
+                                            <label for="article_tag">标签：</label>
+                                            <select name="article_tag" class="form-control" id="article_tag">
+                                                <option value="1">原创</option>
+                                                <option value="2">转发</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="article_type">栏目</label>
+                                            <select name="article_type" class="form-control" id="article_type">
+                                                <option value="1">小说</option>
+                                                <option value="2">古籍</option>
+                                                <option value="3">专辑</option>
+                                                <option value="4">自传</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="file_uri">选择封面：</label>
+                                            <div hidden>
+                                                <input type="file" id="upload_input" name="file-upload">
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="file_uri" id="file_uri" value="" disabled>
+                                                <div class="input-group-btn">
+                                                    <button id="upload" class="btn btn-default" type="button" onclick="">上传图片</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div  class="form-group">
+                                            <label for="article_order" class="control-label">排序：</label>
+                                            <input type="text" class="form-control" id="article_order" value="0">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="web_site_description">文章简介</label>
+                                            <textarea class="form-control" id="web_site_description" rows="5" name="web_site_description" placeholder="请输入文章简介"></textarea>
+                                            <small class="help-block">简单描述文章内容</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="summernote">文章内容</label>
+                                            <textarea id="summernote" name="editordata"></textarea>
+                                        </div>
+                                        <div class="form-group" style="text-align: center">
+                                            <div class="col-xs-12">
+                                                <label class="checkbox-inline" for="example-inline-checkbox1">
+                                                    <input type="checkbox" id="example-inline-checkbox1" name="example-inline-checkbox1" value="option1">置顶
+                                                </label>
+                                                <label class="checkbox-inline" for="example-inline-checkbox2">
+                                                    <input type="checkbox" id="example-inline-checkbox2" name="example-inline-checkbox2" value="option2">热门
+                                                </label>
+                                                <label class="checkbox-inline" for="example-inline-checkbox3">
+                                                    <input type="checkbox" id="example-inline-checkbox3" name="example-inline-checkbox3" value="option3">展示
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12" style="text-align: center">
+                                        <div class="form-group col-md-3 col-md-offset-3">
+                                            <button class="btn btn-label btn-info" type="reset"><label><i class="mdi mdi-backup-restore"></i></label>重  置</button>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <button class="btn btn-label btn-primary" type="button"><label><i class="mdi mdi-checkbox-marked-circle-outline"></i></label>提  交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script type="text/javascript" src="../../static/manager/js/jquery.min.js" th:src="@{~/manager/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../../static/manager/js/bootstrap.min.js" th:src="@{~/manager/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../../static/manager/js/perfect-scrollbar.min.js" th:src="@{~/manager/js/perfect-scrollbar.min.js}"></script>
+<script type="text/javascript" src="../../static/manager/js/bootstrap-notify.min.js" th:src="@{~/manager/js/bootstrap-notify.min.js}"></script>
+<script type="text/javascript" src="../../static/manager/js/lightyear.js" th:src="@{~/manager/js/lightyear.js}"></script>
+<script type="text/javascript" src="../../static/manager/js/main.min.js" th:src="@{~/manager/js/main.min.js}"></script>
+<script type="text/javascript" src="../../static/common/summernote/summernote.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: null,                 // set editor height
+            minHeight: 400,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+        });
+    })
+
+    $(function(){
+        // 自定义文件上传框
+        $('#upload').on('click', function() {
+            $('#upload_input').trigger('click');
+            $('#upload_input').on("change" ,function() {
+                let filePath = $('#upload_input').val();
+                $('#file_uri').val(filePath);
+            })
+        })
+
+        // 获取富文本HTML内容
+        $(".btn-primary").unbind("click").on("click",function (){
+            let markupStr = $('#summernote').summernote('code');
+            console.log(markupStr);
+        })
+
+        /// TODO 提交按钮点击事件，获取提交的内容
+
+    })
+    /*]]>*/
+</script>
+</body>
+</html>
