@@ -15,7 +15,11 @@ function loginCheck() {
                 setTimeout(function() {
                     lightyear.loading('hide');
                     lightyear.notify('登陆成功!即将返回!', 'success', 1500, 'mdi mdi-emoticon-happy', 'top', 'center');
-                    history.go(-1);
+                    if(res.data.level === 0){
+                        location.href = "/manager/index"
+                    }else {
+                        history.go(-1);
+                    }
                 }, 1e3)
             }else {
                 setTimeout(function() {

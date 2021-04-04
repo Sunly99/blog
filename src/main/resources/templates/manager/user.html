@@ -227,6 +227,7 @@
                     <tr>
                       <th>Id</th>
                       <th>用户名</th>
+                      <th>头像</th>
                       <th>密码</th>
                       <th>昵称</th>
                       <th>角色</th>
@@ -238,6 +239,7 @@
                     <tr th:each="user:${users.list}">
                       <td th:utext="${user.id}" class="userId"></td>
                       <td th:utext="${user.username}" class="username"></td>
+                      <td th:utext="${user.avatar}" class="avatar"></td>
                       <td th:utext="${user.password}" class="password"></td>
                       <td th:utext="${user.nickName}" class="nickName"></td>
                       <td th:utext="${user.level}==0?'站主':'用户'"></td>
@@ -307,6 +309,10 @@
             <label for="nickname" class="control-label">昵称：</label>
             <input type="text" class="form-control" id="nickname">
           </div>
+          <div class="form-group">
+            <label for="avatar" class="control-label">头像：</label>
+            <input type="text" class="form-control" id="avatar">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -339,6 +345,7 @@
         modal.find('#username').val(dataObj.find('.username').text());
         modal.find('#password').val(dataObj.find('.password').text());
         modal.find('#nickname').val(dataObj.find('.nickName').text());
+        modal.find('#avatar').val(dataObj.find('.avatar').text());
       }
       $('#commit').unbind('click').click(function (){
         lightyear.loading('show');
@@ -349,7 +356,8 @@
           data = {
             'username':modal.find('#username').val(),
             'password':modal.find('#password').val(),
-            'nickName':modal.find('#nickname').val()
+            'nickName':modal.find('#nickname').val(),
+            'avatar':modal.find('#avatar').val()
           }
         }else if(recipient === '编辑'){
           url = '/user/modify'
@@ -357,7 +365,8 @@
             'id':modal.find('#userId').val(),
             'username':modal.find('#username').val(),
             'password':modal.find('#password').val(),
-            'nickName':modal.find('#nickname').val()
+            'nickName':modal.find('#nickname').val(),
+            'avatar':modal.find('#avatar').val()
           }
         }
         $.ajax({

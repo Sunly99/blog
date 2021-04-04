@@ -223,7 +223,7 @@
             <div class="card">
               <div class="card-toolbar clearfix">
                 <div class="toolbar-btn-action">
-                  <button type="button" class="btn btn-primary m-r-5" data-toggle="modal" data-target="#editModal" data-whatever="新增"><i class="mdi mdi-plus"></i>新增</button>
+                  <button type="button" class="btn btn-primary m-r-5" id="addModal"><i class="mdi mdi-plus"></i>新增</button>
                 </div>
               </div>
               <div class="card-body">
@@ -251,12 +251,13 @@
                     <tr th:each="article:${articles.list}">
                       <td th:utext="${article.id}" class="article_id"></td>
                       <td th:utext="${article.categoryName}" class="article_category_name"></td>
-                      <td th:utext="${article.title}" class="article_title"></td>
+                      <td colspan="1" style="word-wrap:break-word;word-break:break-all;width: 200px" th:title="${article.about}" class="article_title">[[${article.title}]]</td>
                       <td class="article_avatar">
                         <img th:src="${article.avatar}" alt="avatar" style="width: 300px"/>
                       </td>
-                      <td th:utext="${article.about}" class="article_about" style="max-width: 300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" th:title="${article.about}">
-                      </td>
+<!--                      <td th:utext="${article.about}" class="article_about" style="max-width: 300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" th:title="${article.about}">-->
+<!--                      </td>-->
+                      <td  colspan="1" style="word-wrap:break-word;word-break:break-all;width: 200px" th:title="${article.about}" class="article_about">[[${article.about}]]</td>
                       <td >
                         <button id="mainArticle"  type="button" class="btn btn-xs btn-primary article-main" data-toggle="modal" data-target="#mainModal" th:data-whatever="${article.id}">
                           点击查看
@@ -286,7 +287,7 @@
                       </td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#editModal" data-whatever="编辑" title="编辑"><i class="mdi mdi-pencil"></i></button>
+<!--                          <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#editModal" data-whatever="编辑" title="编辑"><i class="mdi mdi-pencil"></i></button>-->
                           <button type="button" class="btn btn-xs btn-default delButton" title="删除" th:data-id="${article.id}"><i class="mdi mdi-window-close"></i></button>
                         </div>
                       </td>
@@ -327,7 +328,7 @@
         <h4 class="modal-title" id="myModalLabel">内容</h4>
       </div>
       <div class="modal-body">
-        您的内容...
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
@@ -349,11 +350,12 @@
       let button = $(event.relatedTarget);
       let recipient = button.data('whatever');
       let modal = $(this);
+      modal.find('.modal-body').text("")
       $.ajax({
         url: '/article/query/'+ recipient,
         type: 'get',
         success:function(res){
-          modal.find('.modal-body').text(res.content)
+          modal.find('.modal-body').append(res.content)
         }
       })
     })
@@ -421,6 +423,10 @@
           lightyear.loading('hide');
         }
       })
+    })
+
+    $('#addModal').unbind('click').on('click', function(){
+      location.href = "/manager/article-add"
     })
   });
   /*]]>*/

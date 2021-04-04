@@ -20,6 +20,6 @@ public class IndexController {
     @GetMapping("/")
     public String indexPage(Model model){
         model.addAttribute("hotArticles",articleService.selectHotArticle(3));
-        return "/home/index";
+        return "home/index";
     }
 }

@@ -1,6 +1,7 @@
 package blog.service.impl;
 
 import blog.common.enumeration.StatusCodeEnum;
+import blog.common.util.FileUtils;
 import blog.common.util.ParameterWrapperUtils;
 import blog.pojo.mapper.ArticleMapper;
 import blog.pojo.mapper.view.ArticleViewMapper;
@@ -32,6 +33,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
     @Resource
     private ArticleViewMapper articleViewMapper;
+    @Resource
+    private FileUtils fileUtils;
 
     @Override
     public ResponseVO<?> insertArticle(Article article) {
@@ -40,6 +43,7 @@ public class ArticleServiceImpl implements ArticleService {
             Date date = new Date();
             article.setCreateTime(date);
             article.setUpdateTime(date);
+            article.setCounts(0);
             count = articleMapper.insertSelective(article);
         }catch (Exception e){
             log.error("ArticleServiceImpl:insertArticle \n" + e.getMessage());
@@ -52,6 +56,8 @@ public class ArticleServiceImpl implements ArticleService {
     public ResponseVO<?> deleteArticle(Integer id) {
         int count;
         try{
+            String avatar = articleMapper.selectByPrimaryKey(id).getAvatar();
+            fileUtils.dropFile(avatar);
             count = articleMapper.deleteByPrimaryKey(id);
         }catch (Exception e){
             log.error("ArticleServiceImpl:deleteArticle \n" + e.getMessage());

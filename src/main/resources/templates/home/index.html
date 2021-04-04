@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="news-content">
                                     <h4>
-                                        <a href="read.html" th:href="@{'/home/read/'+${hotArticle.id}}" th:utext="${hotArticleStat.count}"></a>
+                                        <a href="read.html" th:href="@{'/home/read/'+${hotArticle.id}}" th:utext="${hotArticle.title}"></a>
                                     </h4>
                                     <div class="date" th:utext="${#dates.format(hotArticle.updateTime, 'yyyy-MM-dd')}">
                                         2020年05月20日

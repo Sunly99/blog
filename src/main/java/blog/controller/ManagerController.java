@@ -93,4 +93,10 @@ public class ManagerController {
         model.addAttribute("articles",articleService.selectArticle(pageNum, pageSize, "id"));
         return "manager/blog";
     }
+
+    @GetMapping("/article-add")
+    public String articleAddPage(Model model){
+        model.addAttribute("categories",articleCategoryService.selectArticleCategory());
+        return "manager/blog-add";
+    }
 }
