@@ -7,7 +7,7 @@ import lombok.Getter;
 /**
  * 标准状态代码枚举
  *
- * @author 水张哲
+ * @author sly
  */
 
 @AllArgsConstructor
@@ -18,9 +18,9 @@ public enum StatusCodeEnum {
     Error(-1,"操作失败"),
     // 操作成功
     SUCCESS(0,"操作成功"),
-
+    // 404 NOT FOUND
     NOT_FOUND(404,"404 NOT FOUND"),
-
+    // 参数异常
     PARAM_EXCEPTION(400.1, "参数异常"),
 
     // 数据库保存失败
@@ -32,16 +32,24 @@ public enum StatusCodeEnum {
     // 数据库读取失败
     DATABASE_SELECT_FAIL(500.4,"数据库查询失败"),
 
+    // 空文件异常
     EMPTY_FILE_ERROR(600.1, "空文件异常"),
+    // 文件上传异常
     FILE_UPLOAD_ERROR(600.2, "文件上传异常"),
+    // 文件删除异常
     FILE_DELETE_ERROR(600.3, "文件删除异常"),
+    // 文件夹创建失败
     FILE_MKDIR_ERROR(600.4, "文件夹创建失败"),
+    // 文件存放路径有误
     FILE_URI_ERROR(600.5, "文件存放路径有误"),
+    // 文件超出指定大小
     FILE_SIZE_ERROR(600.6, "文件超出指定大小"),
+    // 文件下载异常
     FILE_DOWNLOAD_ERROR(600.7, "文件下载异常"),
+    // 文件类型异常
     FILE_TYPE_ERROR(600.8, "文件类型异常"),
+    // 文件不存在
     FILE_NO_EXISTS_ERROR(600.9, "文件不存在"),
-
 
     // 登录-用户未登录
     LOGIN_USER_NOT_LOGIN(200.1,"用户未登录"),
@@ -52,6 +60,7 @@ public enum StatusCodeEnum {
     // 登录-用户被冻结
     LOGIN_CANNOT_LOGIN(200.4,"用户被冻结"),
 
+    // 未知错误
     UNKNOWN_ERROR(999, "未知错误");;
 
     private final double code;
